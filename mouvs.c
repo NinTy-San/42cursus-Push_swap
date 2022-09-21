@@ -6,15 +6,15 @@
 /*   By: adohou <adohou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 21:51:30 by adohou            #+#    #+#             */
-/*   Updated: 2022/09/20 21:58:34 by adohou           ###   ########.fr       */
+/*   Updated: 2022/09/21 19:07:19 by adohou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	sa()
-{
-	if (ft_lstsize(&lst) < 2)
-		return ;
+// void	sa()
+// {
+// 	if (ft_lstsize(&lst) < 2)
+// 		return ;
 
-}
+// }

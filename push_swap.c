@@ -6,7 +6,7 @@
 /*   By: adohou <adohou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 22:44:19 by adohou            #+#    #+#             */
-/*   Updated: 2022/09/20 19:21:43 by adohou           ###   ########.fr       */
+/*   Updated: 2022/09/21 19:23:27 by adohou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int main ()
 {
-	t_list	*lst;
-	t_list 	*new;
+	pile	*lst;
+	pile 	*new;
 	int 	nbr;
 	int		nbr2;
 
@@ -27,7 +27,7 @@ int main ()
 	// printf("%d", lst->nb);
 	while(lst)
 	{
-		printf("%d ", lst->nb);
+		printf("%d ", lst->value);
 		lst = lst->next;
 	}
 	return (0);

@@ -6,84 +6,81 @@
 /*   By: adohou <adohou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 19:21:21 by adohou            #+#    #+#             */
-/*   Updated: 2022/09/21 22:54:49 by adohou           ###   ########.fr       */
+/*   Updated: 2022/09/25 21:59:14 by adohou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-pile	*ft_lstnew(int value)
+t_list	*ft_lstnew(int value)
 {
-	pile		*lst;
+	t_list		*lst;
 
-	lst = malloc(sizeof(pile));
+	lst = malloc(sizeof(lst));
 	if (!lst)
 		return (NULL);
-	(*lst)->value = value;
+	lst->value = value;
 
-	(*lst)->next = NULL;
-	return (lst);
-}
-pile	new_pile(void)
-{
-	return NULL ;
-}
-
-pile	*ft_lstlast(pile *lst)
-{
-	if (!lst)
-		return (NULL);
-	while ((*lst)->next)
-		lst = (*lst)->next;
+	lst->next = NULL;
 	return (lst);
 }
 
-void	ft_lstadd_back(pile **lst, pile *new)
+
+t_list	*ft_lstlast(t_list *lst)
 {
-	pile	*tmp;
+	if (!lst)
+		return (NULL);
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
+}
+
+void	ft_lstadd_back(t_list **lst, t_list *new)
+{
+	t_list	*tmp;
 
 	if (!lst || !new)
 		return ;
-	if (!(lst))
+	if (!(*lst))
 		*lst = new;
 	else
 	{
 		tmp = ft_lstlast((*lst));
-		(*tmp)->next = new;
+		tmp->next = new;
 	}
 }
 
-void	ft_lstdelone(pile *lst, void (*del)(int))
+void	ft_lstdelone(t_list *lst, void (*del)(int))
 {
-	(*del)((*lst)->value);
+	(*del)(lst->value);
 	free(lst);
 }
 
-void	ft_lstclear(pile **lst, void (*del)(int))
+void	ft_lstclear(t_list **lst, void (*del)(int))
 {
-	pile	*tmp;
+	t_list	*tmp;
 
 	tmp = NULL;
 	while ((*lst))
 	{
 		tmp = *lst;
-		(*del)((**lst)->value);
-		(*lst) = (**lst)->next;
+		(*del)((*lst)->value);
+		(*lst)= (*lst)->next;
 		free(tmp);
 	}
 	free(*lst);
 	(*lst) = NULL;
 }
 
-void	ft_lstadd_front(pile **lst, pile *new)
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
 	if (!new || !lst)
 		return ;
-	(*new)->next = *lst;
+	new->next = *lst;
 	*lst = new;
 }
 
-int	ft_lstsize(pile *lst)
+int	ft_lstsize(t_list *lst)
 {
 	int	i;
 
@@ -91,10 +88,7 @@ int	ft_lstsize(pile *lst)
 	while (lst)
 	{
 		i++;
-		lst = (*lst)->next;
+		lst = lst->next;
 	}
 	return (i);
 }
-
-
-

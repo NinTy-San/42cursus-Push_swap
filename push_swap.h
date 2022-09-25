@@ -6,7 +6,7 @@
 /*   By: adohou <adohou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 22:44:42 by adohou            #+#    #+#             */
-/*   Updated: 2022/09/21 22:50:16 by adohou           ###   ########.fr       */
+/*   Updated: 2022/09/25 21:29:33 by adohou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,31 @@
 # include <unistd.h>
 
 
-typedef struct s_pile
+
+
+typedef struct s_list
 {
-	int			value;
-	struct s_pile	*next;
-} *pile;
+	int				value;
+	struct s_list	*next;
+} t_list;
+
+// typedef struct s_list_pile
+// {
+// 	t_list	pile_a;
+// 	t_list	pile_b;
+// } t_list_pile;
 
 
 
-pile	*ft_lstnew(int nb);
-pile	*ft_lstlast(pile *lst);
-void	ft_lstadd_back(pile **lst, pile *new);
-void	ft_lstadd_front(pile **lst, pile *new);
-void	ft_lstdelone(pile *lst, void (*del)(int));
-void	ft_lstclear(pile **lst, void (*del)(int));
-int	ft_lstsize(pile *lst);
+
+t_list	*ft_lstnew(int nb);
+t_list	*ft_lstlast(t_list *lst);
+void	ft_lstadd_back(t_list **lst, t_list *new);
+void	ft_lstadd_front(t_list **lst, t_list *new);
+void	ft_lstdelone(t_list *lst, void (*del)(int));
+void	ft_lstclear(t_list **lst, void (*del)(int));
+int	ft_lstsize(t_list *lst);
+
+int	ft_atoi(const char *nptr);
 
 #endif

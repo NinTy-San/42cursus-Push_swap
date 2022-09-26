@@ -6,13 +6,13 @@
 /*   By: adohou <adohou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 19:21:21 by adohou            #+#    #+#             */
-/*   Updated: 2022/09/25 21:59:14 by adohou           ###   ########.fr       */
+/*   Updated: 2022/09/26 17:24:25 by adohou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_list	*ft_lstnew(int value)
+t_list	*ft_lstnew(long value)
 {
 	t_list		*lst;
 

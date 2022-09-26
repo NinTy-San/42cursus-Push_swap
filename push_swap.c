@@ -6,7 +6,7 @@
 /*   By: adohou <adohou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 22:44:19 by adohou            #+#    #+#             */
-/*   Updated: 2022/09/25 21:54:32 by adohou           ###   ########.fr       */
+/*   Updated: 2022/09/26 18:39:14 by adohou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,23 @@ int main (int ac, char **av)
 {
 	t_list	*pile_a;
 	t_list	*new;
+	int		*args;
 	int		i;
-	int		nb;
 
-	i = 1;
-	nb = 0;
+	i = 0;
 	pile_a = NULL;
-	while (i < ac)
+
+	args = get_args(ac, av);
+	if(!args)
 	{
-		// printf("%d", j);
-		// printf("%c", av[i][j]);
-		nb = ft_atoi(av[i]);
-		// printf("-%d ", nb);
-		new = ft_lstnew(nb);
+		free(args);
+		printf("Error!");
+		return (0);
+	}
+	while (args[i])
+	{
+		new = ft_lstnew(args[i]);
+		// printf("->new = %ld\n", new->value);
 		if (!new)
 			return (0);
 		ft_lstadd_back(&pile_a, new);
@@ -36,7 +40,7 @@ int main (int ac, char **av)
 	}
 	while(pile_a)
 	{
-		printf("%d ", pile_a->value);
+		printf("%ld ", pile_a->value);
 		pile_a = pile_a->next;
 	}
 

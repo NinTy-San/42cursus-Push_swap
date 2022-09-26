@@ -6,17 +6,17 @@
 /*   By: adohou <adohou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 19:39:55 by adohou            #+#    #+#             */
-/*   Updated: 2022/09/22 19:40:57 by adohou           ###   ########.fr       */
+/*   Updated: 2022/09/26 19:06:22 by adohou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_atoi(const char *nptr)
+long	ft_atoi(const char *nptr)
 {
 	int	i;
-	int	nb;
-	int	sign;
+	long	nb;
+	long	sign;
 
 	i = 0;
 	nb = 0;
@@ -35,4 +35,65 @@ int	ft_atoi(const char *nptr)
 		i++;
 	}
 	return (nb * sign);
+}
+
+int	check_int_args(int *args)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	while (args[i])
+	{
+		j = 0;
+		while (args[j])
+		{
+			if(i != j && args[i] == args[j])
+				return 0;
+		j++;
+		}
+		i++;
+	}
+	return (1);
+}
+int	is_int(char *av)
+{
+	int		i;
+
+	i = 0;
+	while(av[i])
+	{
+		if (av[i] == ' ' || av[i] == '-' || (av[i] >= '0' && av[i] <= '9'))
+			i++;
+		else
+			return (0);
+	}
+	return (1);
+}
+
+int	*get_args(int ac, char **av)
+{
+	int		i;
+	long	nb;
+	int		*args;
+
+	args = malloc(sizeof(int) * (ac - 1));
+	if (!args)
+		return (NULL);
+	i = 1;
+	while (i < ac)
+	{
+		if (!is_int(av[i]))
+			return (NULL);
+		nb = ft_atoi(av[i]);
+		if (nb > INT_MAX || nb < INT_MIN)
+			return NULL;
+		args[i - 1] = nb;
+		i++;
+	}
+	if (!check_int_args(args))
+	{
+		return (NULL);
+	}
+	return (args);
 }

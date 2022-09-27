@@ -6,7 +6,7 @@
 /*   By: adohou <adohou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 22:44:19 by adohou            #+#    #+#             */
-/*   Updated: 2022/09/27 19:21:29 by adohou           ###   ########.fr       */
+/*   Updated: 2022/09/27 23:05:54 by adohou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int main (int ac, char **av)
 	i = 0;
 	pile_a = NULL;
 	pile_b = NULL;
+
 	args = get_args(ac, av);
 	if(!args)
 	{
@@ -35,7 +36,6 @@ int main (int ac, char **av)
 	while (args[i])
 	{
 		new = ft_lstnew(args[i]);
-		// printf("->new = %ld\n", new->value);
 		if (!new)
 			return (0);
 		ft_lstadd_back(&pile_a, new);
@@ -66,8 +66,9 @@ int main (int ac, char **av)
 		printf("%ld ", pile_a->value);
 		pile_a = pile_a->next;
 	}
-
-
+	ft_lst_free(&pile_a);
+	ft_lst_free(&pile_b);
+	// free(args);
 	return (0);
 }
 

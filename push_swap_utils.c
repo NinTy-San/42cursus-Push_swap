@@ -6,7 +6,7 @@
 /*   By: adohou <adohou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 19:39:55 by adohou            #+#    #+#             */
-/*   Updated: 2022/09/26 19:06:22 by adohou           ###   ########.fr       */
+/*   Updated: 2022/09/27 23:03:39 by adohou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,16 @@ int	check_int_args(int *args)
 	int		j;
 
 	i = 0;
+	j = 0;
+	if (!args)
+		return (0);
 	while (args[i])
 	{
 		j = 0;
 		while (args[j])
 		{
 			if(i != j && args[i] == args[j])
-				return 0;
+				return (0);
 		j++;
 		}
 		i++;
@@ -77,10 +80,11 @@ int	*get_args(int ac, char **av)
 	long	nb;
 	int		*args;
 
-	args = malloc(sizeof(int) * (ac - 1));
+	args = malloc(sizeof(long) * (ac - 1));
 	if (!args)
 		return (NULL);
 	i = 1;
+
 	while (i < ac)
 	{
 		if (!is_int(av[i]))

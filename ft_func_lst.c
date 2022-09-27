@@ -6,7 +6,7 @@
 /*   By: adohou <adohou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 19:21:21 by adohou            #+#    #+#             */
-/*   Updated: 2022/09/26 17:24:25 by adohou           ###   ########.fr       */
+/*   Updated: 2022/09/27 22:21:41 by adohou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,17 @@ int	ft_lstsize(t_list *lst)
 		lst = lst->next;
 	}
 	return (i);
+}
+
+void	ft_lst_free(t_list **pile)
+{
+	t_list	*tmp;
+
+	tmp = NULL;
+	while ((*pile))
+	{
+		tmp = (*pile)->next;
+		free((*pile));
+		(*pile) = tmp;
+	}
 }

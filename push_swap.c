@@ -6,7 +6,7 @@
 /*   By: adohou <adohou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 22:44:19 by adohou            #+#    #+#             */
-/*   Updated: 2022/09/26 18:39:14 by adohou           ###   ########.fr       */
+/*   Updated: 2022/09/27 19:21:29 by adohou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,16 @@
 int main (int ac, char **av)
 {
 	t_list	*pile_a;
+	t_list	*pile_b;
 	t_list	*new;
+	t_list	*start;
+
 	int		*args;
 	int		i;
 
 	i = 0;
 	pile_a = NULL;
-
+	pile_b = NULL;
 	args = get_args(ac, av);
 	if(!args)
 	{
@@ -38,11 +41,32 @@ int main (int ac, char **av)
 		ft_lstadd_back(&pile_a, new);
 		i++;
 	}
+	start = pile_a;
 	while(pile_a)
 	{
 		printf("%ld ", pile_a->value);
 		pile_a = pile_a->next;
 	}
+	pile_a = start;
+	pb(&pile_a, &pile_b);
+	pb(&pile_a, &pile_b);
+	printf("pile_b = ");
+	start = pile_b;
+	while(pile_b)
+	{
+		printf("%ld ", pile_b->value);
+		pile_b = pile_b->next;
+	}
+	pile_b = start;
+	printf("\n");
+	pa(&pile_b, &pile_a);
+	printf("pile_a = ");
+	while(pile_a)
+	{
+		printf("%ld ", pile_a->value);
+		pile_a = pile_a->next;
+	}
+
 
 	return (0);
 }

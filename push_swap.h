@@ -6,7 +6,7 @@
 /*   By: adohou <adohou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 22:44:42 by adohou            #+#    #+#             */
-/*   Updated: 2022/09/26 18:25:25 by adohou           ###   ########.fr       */
+/*   Updated: 2022/09/27 18:58:01 by adohou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_list
 
 
 
-
+// functions ft_lst
 t_list	*ft_lstnew(long nb);
 t_list	*ft_lstlast(t_list *lst);
 void	ft_lstadd_back(t_list **lst, t_list *new);
@@ -47,9 +47,15 @@ void	ft_lstdelone(t_list *lst, void (*del)(int));
 void	ft_lstclear(t_list **lst, void (*del)(int));
 int	ft_lstsize(t_list *lst);
 
+// functions utils
 long	ft_atoi(const char *nptr);
 int	*get_args(int ac, char **av);
 int	check_int_args(int *args);
 int	is_int(char *av);
+
+// functions mouvs
+void pb(t_list **pile_a, t_list **pile_b);
+void pa(t_list **pile_b, t_list **pile_a);
+
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: adohou <adohou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 22:44:42 by adohou            #+#    #+#             */
-/*   Updated: 2022/09/27 23:01:36 by adohou           ###   ########.fr       */
+/*   Updated: 2022/10/01 21:14:02 by adohou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ void	ft_lst_free(t_list **pile);
 
 // functions utils
 long	ft_atoi(const char *nptr);
-int	*get_args(int ac, char **av);
-int	check_int_args(int *args);
+int	*get_args(int ac, char **av, int *args);
+int	check_int_args(int ac, int *args);
 int	is_int(char *av);
 
 // functions mouvs

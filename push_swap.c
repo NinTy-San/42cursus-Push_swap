@@ -6,7 +6,7 @@
 /*   By: adohou <adohou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 22:44:19 by adohou            #+#    #+#             */
-/*   Updated: 2022/09/27 23:05:54 by adohou           ###   ########.fr       */
+/*   Updated: 2022/10/01 20:35:34 by adohou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,13 @@ int main (int ac, char **av)
 	i = 0;
 	pile_a = NULL;
 	pile_b = NULL;
+	args = malloc(sizeof(long) * (ac - 1));
+	if (!args)
+		return (0);
+	args = get_args(ac, av, args);
 
-	args = get_args(ac, av);
 	if(!args)
 	{
-		free(args);
 		printf("Error!");
 		return (0);
 	}
@@ -41,6 +43,7 @@ int main (int ac, char **av)
 		ft_lstadd_back(&pile_a, new);
 		i++;
 	}
+	free(args);
 	start = pile_a;
 	while(pile_a)
 	{

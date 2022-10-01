@@ -6,7 +6,7 @@
 /*   By: adohou <adohou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 19:39:55 by adohou            #+#    #+#             */
-/*   Updated: 2022/09/27 23:03:39 by adohou           ###   ########.fr       */
+/*   Updated: 2022/10/01 21:20:46 by adohou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ long	ft_atoi(const char *nptr)
 	return (nb * sign);
 }
 
-int	check_int_args(int *args)
+
+int	check_int_args(int ac, int *args)
 {
 	int		i;
 	int		j;
@@ -46,10 +47,10 @@ int	check_int_args(int *args)
 	j = 0;
 	if (!args)
 		return (0);
-	while (args[i])
+	while (i < ac)
 	{
 		j = 0;
-		while (args[j])
+		while (j < ac)
 		{
 			if(i != j && args[i] == args[j])
 				return (0);
@@ -74,16 +75,16 @@ int	is_int(char *av)
 	return (1);
 }
 
-int	*get_args(int ac, char **av)
+int	*get_args(int ac, char **av, int *args)
 {
 	int		i;
 	long	nb;
-	int		*args;
 
-	args = malloc(sizeof(long) * (ac - 1));
+
 	if (!args)
 		return (NULL);
 	i = 1;
+	nb  = 0;
 
 	while (i < ac)
 	{
@@ -95,9 +96,7 @@ int	*get_args(int ac, char **av)
 		args[i - 1] = nb;
 		i++;
 	}
-	if (!check_int_args(args))
-	{
-		return (NULL);
-	}
+	if (!check_int_args(ac, args))
+		return (0);
 	return (args);
 }

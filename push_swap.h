@@ -6,7 +6,7 @@
 /*   By: adohou <adohou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 22:44:42 by adohou            #+#    #+#             */
-/*   Updated: 2022/10/01 21:14:02 by adohou           ###   ########.fr       */
+/*   Updated: 2022/10/04 20:34:28 by adohou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,16 @@ void	ft_lst_free(t_list **pile);
 
 // functions utils
 long	ft_atoi(const char *nptr);
-int	*get_args(int ac, char **av, int *args);
-int	check_int_args(int ac, int *args);
+t_list	*get_args(t_list *pile_a, int ac, char **av);
+int	check_double(t_list *pile_a, int ac);
 int	is_int(char *av);
 
 // functions mouvs
-void pb(t_list **pile_a, t_list **pile_b);
-void pa(t_list **pile_b, t_list **pile_a);
+void	pb(t_list **pile_a, t_list **pile_b);
+void	pa(t_list **pile_b, t_list **pile_a);
+void	ra(t_list **pile_a);
+void	rb(t_list **pile_a);
+
 
 
 #endif

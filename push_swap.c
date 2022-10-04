@@ -6,7 +6,7 @@
 /*   By: adohou <adohou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 22:44:19 by adohou            #+#    #+#             */
-/*   Updated: 2022/10/01 20:35:34 by adohou           ###   ########.fr       */
+/*   Updated: 2022/10/04 21:14:01 by adohou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,59 +16,57 @@ int main (int ac, char **av)
 {
 	t_list	*pile_a;
 	t_list	*pile_b;
-	t_list	*new;
-	t_list	*start;
+	t_list	*start_a;
+	t_list	*start_b;
 
-	int		*args;
-	int		i;
+	// int		*args;
+	// int		i;
 
-	i = 0;
+	// i = 0;
 	pile_a = NULL;
 	pile_b = NULL;
-	args = malloc(sizeof(long) * (ac - 1));
-	if (!args)
+	if (ac <= 1)
 		return (0);
-	args = get_args(ac, av, args);
+	pile_a = get_args(pile_a, ac, av);
+	if (!pile_a)
+		return (0);
 
-	if(!args)
-	{
-		printf("Error!");
-		return (0);
-	}
-	while (args[i])
-	{
-		new = ft_lstnew(args[i]);
-		if (!new)
-			return (0);
-		ft_lstadd_back(&pile_a, new);
-		i++;
-	}
-	free(args);
-	start = pile_a;
+	start_a = pile_a;
+	printf("args into pile_a");
 	while(pile_a)
 	{
 		printf("%ld ", pile_a->value);
 		pile_a = pile_a->next;
 	}
-	pile_a = start;
+	pile_a = start_a;
 	pb(&pile_a, &pile_b);
 	pb(&pile_a, &pile_b);
 	printf("pile_b = ");
-	start = pile_b;
+	start_b = pile_b;
 	while(pile_b)
 	{
 		printf("%ld ", pile_b->value);
 		pile_b = pile_b->next;
 	}
-	pile_b = start;
+	pile_b = start_b;
 	printf("\n");
 	pa(&pile_b, &pile_a);
 	printf("pile_a = ");
+	start_a = pile_a;
 	while(pile_a)
 	{
 		printf("%ld ", pile_a->value);
 		pile_a = pile_a->next;
 	}
+	pile_a = start_a;
+	ra(&pile_a);
+	printf("\nprint after ra\n");
+	while(pile_a)
+	{
+		printf("%ld ", pile_a->value);
+		pile_a = pile_a->next;
+	}
+
 	ft_lst_free(&pile_a);
 	ft_lst_free(&pile_b);
 	// free(args);

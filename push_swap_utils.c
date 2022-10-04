@@ -6,7 +6,7 @@
 /*   By: adohou <adohou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 19:39:55 by adohou            #+#    #+#             */
-/*   Updated: 2022/10/01 21:20:46 by adohou           ###   ########.fr       */
+/*   Updated: 2022/10/03 21:56:50 by adohou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,24 +38,28 @@ long	ft_atoi(const char *nptr)
 }
 
 
-int	check_int_args(int ac, int *args)
+int	check_double(t_list *pile_a, int ac)
 {
 	int		i;
 	int		j;
+	t_list	*tmp;
 
-	i = 0;
-	j = 0;
-	if (!args)
+	i = 1;
+	j = 1;
+	if (!pile_a)
 		return (0);
 	while (i < ac)
 	{
-		j = 0;
+		j = i;
+		tmp = pile_a;
 		while (j < ac)
 		{
-			if(i != j && args[i] == args[j])
+			if(i != j && pile_a->value == tmp->value)
 				return (0);
+		tmp = tmp->next;
 		j++;
 		}
+		pile_a = pile_a->next;
 		i++;
 	}
 	return (1);
@@ -75,28 +79,29 @@ int	is_int(char *av)
 	return (1);
 }
 
-int	*get_args(int ac, char **av, int *args)
+t_list *get_args(t_list *pile_a, int ac, char **av)
 {
 	int		i;
 	long	nb;
+	t_list	*new;
+	// t_list	*start;
 
-
-	if (!args)
-		return (NULL);
 	i = 1;
 	nb  = 0;
-
 	while (i < ac)
 	{
 		if (!is_int(av[i]))
 			return (NULL);
 		nb = ft_atoi(av[i]);
 		if (nb > INT_MAX || nb < INT_MIN)
-			return NULL;
-		args[i - 1] = nb;
+			return (NULL);
+		new = ft_lstnew(nb);
+		if (!new)
+			return (NULL);
+		ft_lstadd_back(&pile_a, new);
 		i++;
 	}
-	if (!check_int_args(ac, args))
-		return (0);
-	return (args);
+	if (!check_double(pile_a, ac))
+		return (NULL);
+	return (pile_a);
 }

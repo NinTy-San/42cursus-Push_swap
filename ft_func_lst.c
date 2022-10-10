@@ -6,7 +6,7 @@
 /*   By: adohou <adohou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 19:21:21 by adohou            #+#    #+#             */
-/*   Updated: 2022/09/27 22:21:41 by adohou           ###   ########.fr       */
+/*   Updated: 2022/10/10 14:31:47 by adohou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,10 @@ t_list	*ft_lstnew(long value)
 {
 	t_list		*lst;
 
-	lst = malloc(sizeof(lst));
+	lst = malloc(sizeof(*lst));
 	if (!lst)
 		return (NULL);
 	lst->value = value;
-
 	lst->next = NULL;
 	return (lst);
 }
@@ -37,26 +36,21 @@ t_list	*ft_lstlast(t_list *lst)
 
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	t_list	*tmp;
-
 	if (!lst || !new)
 		return ;
 	if (!(*lst))
 		*lst = new;
 	else
-	{
-		tmp = ft_lstlast((*lst));
-		tmp->next = new;
-	}
+		ft_lstlast((*lst))->next = new;
 }
 
-void	ft_lstdelone(t_list *lst, void (*del)(int))
+
+void	ft_lstdelone(t_list *lst)
 {
-	(*del)(lst->value);
 	free(lst);
 }
 
-void	ft_lstclear(t_list **lst, void (*del)(int))
+void	ft_lstclear(t_list **lst)
 {
 	t_list	*tmp;
 
@@ -64,7 +58,6 @@ void	ft_lstclear(t_list **lst, void (*del)(int))
 	while ((*lst))
 	{
 		tmp = *lst;
-		(*del)((*lst)->value);
 		(*lst)= (*lst)->next;
 		free(tmp);
 	}

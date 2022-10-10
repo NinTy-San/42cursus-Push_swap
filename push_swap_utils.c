@@ -6,7 +6,7 @@
 /*   By: adohou <adohou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 19:39:55 by adohou            #+#    #+#             */
-/*   Updated: 2022/10/03 21:56:50 by adohou           ###   ########.fr       */
+/*   Updated: 2022/10/10 14:28:28 by adohou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ int	check_double(t_list *pile_a, int ac)
 	int		j;
 	t_list	*tmp;
 
+	tmp = NULL;
 	i = 1;
-	j = 1;
 	if (!pile_a)
 		return (0);
 	while (i < ac)
@@ -56,8 +56,8 @@ int	check_double(t_list *pile_a, int ac)
 		{
 			if(i != j && pile_a->value == tmp->value)
 				return (0);
-		tmp = tmp->next;
-		j++;
+			tmp = tmp->next;
+			j++;
 		}
 		pile_a = pile_a->next;
 		i++;
@@ -79,13 +79,15 @@ int	is_int(char *av)
 	return (1);
 }
 
-t_list *get_args(t_list *pile_a, int ac, char **av)
+t_list *get_args(int ac, char **av)
 {
 	int		i;
 	long	nb;
+	t_list 	*pile_a;
 	t_list	*new;
-	// t_list	*start;
 
+	pile_a = NULL;
+	new = NULL;
 	i = 1;
 	nb  = 0;
 	while (i < ac)
@@ -102,6 +104,6 @@ t_list *get_args(t_list *pile_a, int ac, char **av)
 		i++;
 	}
 	if (!check_double(pile_a, ac))
-		return (NULL);
+		return (ft_lst_free(&pile_a), NULL);
 	return (pile_a);
 }

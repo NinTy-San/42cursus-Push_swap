@@ -6,7 +6,7 @@
 /*   By: adohou <adohou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 22:44:42 by adohou            #+#    #+#             */
-/*   Updated: 2022/10/04 20:34:28 by adohou           ###   ########.fr       */
+/*   Updated: 2022/10/10 16:05:23 by adohou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,14 @@ t_list	*ft_lstnew(long nb);
 t_list	*ft_lstlast(t_list *lst);
 void	ft_lstadd_back(t_list **lst, t_list *new);
 void	ft_lstadd_front(t_list **lst, t_list *new);
-void	ft_lstdelone(t_list *lst, void (*del)(int));
-void	ft_lstclear(t_list **lst, void (*del)(int));
+void	ft_lstdelone(t_list *lst);
+void	ft_lstclear(t_list **lst);
 int	ft_lstsize(t_list *lst);
 void	ft_lst_free(t_list **pile);
 
 // functions utils
 long	ft_atoi(const char *nptr);
-t_list	*get_args(t_list *pile_a, int ac, char **av);
+t_list	*get_args(int ac, char **av);
 int	check_double(t_list *pile_a, int ac);
 int	is_int(char *av);
 
@@ -58,8 +58,10 @@ int	is_int(char *av);
 void	pb(t_list **pile_a, t_list **pile_b);
 void	pa(t_list **pile_b, t_list **pile_a);
 void	ra(t_list **pile_a);
-void	rb(t_list **pile_a);
-
-
+void	rb(t_list **pile_b);
+void	sa(t_list **pile_a);
+void	sb(t_list **pile_b);
+void	rra(t_list **pile_a);
+void	rrb(t_list **pile_a);
 
 #endif

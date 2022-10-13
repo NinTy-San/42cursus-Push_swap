@@ -6,7 +6,7 @@
 /*   By: adohou <adohou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 21:51:30 by adohou            #+#    #+#             */
-/*   Updated: 2022/10/10 16:05:29 by adohou           ###   ########.fr       */
+/*   Updated: 2022/10/13 03:24:21 by adohou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	push(t_list **pile_a, t_list **pile_b)
 {
 	t_list	*tmp;
 
-	if (ft_lstsize((*pile_a)) < 2)
+	if (ft_lstsize((*pile_a)) < 1)
 		return ;
 	tmp = (*pile_a)->next;
 	(*pile_a)->next = NULL;

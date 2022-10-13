@@ -6,7 +6,7 @@
 /*   By: adohou <adohou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 22:44:42 by adohou            #+#    #+#             */
-/*   Updated: 2022/10/10 16:05:23 by adohou           ###   ########.fr       */
+/*   Updated: 2022/10/13 05:24:07 by adohou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,11 @@
 
 typedef struct s_list
 {
-	long				value;
+	long			value;
+	int				index;
+	int				pos;
 	struct s_list	*next;
 } t_list;
-
-// typedef struct s_list_pile
-// {
-// 	t_list	pile_a;
-// 	t_list	pile_b;
-// } t_list_pile;
-
-
 
 // functions ft_lst
 t_list	*ft_lstnew(long nb);
@@ -53,6 +47,11 @@ long	ft_atoi(const char *nptr);
 t_list	*get_args(int ac, char **av);
 int	check_double(t_list *pile_a, int ac);
 int	is_int(char *av);
+void	write_error(t_list **pile_a);
+void	get_index(t_list **pile_a);
+void	get_pos(t_list **pile_a);
+
+
 
 // functions mouvs
 void	pb(t_list **pile_a, t_list **pile_b);
@@ -63,5 +62,8 @@ void	sa(t_list **pile_a);
 void	sb(t_list **pile_b);
 void	rra(t_list **pile_a);
 void	rrb(t_list **pile_a);
+void	ss(t_list **pile_a, t_list **pile_b);
+void	rr(t_list **pile_a, t_list **pile_b);
+void	rrr(t_list **pile_a, t_list **pile_b);
 
 #endif

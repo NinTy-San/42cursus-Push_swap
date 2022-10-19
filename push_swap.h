@@ -29,6 +29,7 @@ typedef struct s_list
 	long			value;
 	int				index;
 	int				pos;
+	int				cost;
 	struct s_list	*next;
 } t_list;
 
@@ -50,6 +51,9 @@ int	is_int(char *av);
 void	write_error(t_list **pile_a);
 void	get_index(t_list **pile_a);
 void	get_pos(t_list **pile_a);
+int		calc_cost(int idx, int pos, int pos_total);
+void	get_best_cost(t_list **pile);
+
 
 
 

@@ -20,8 +20,9 @@ t_list	*ft_lstnew(long value)
 	if (!lst)
 		return (NULL);
 	lst->value = value;
-	lst->index = 0;
-	lst->pos = 0;
+	lst->index = 1;
+	lst->pos = 1;
+	lst->cost = 0;
 	lst->next = NULL;
 	return (lst);
 }

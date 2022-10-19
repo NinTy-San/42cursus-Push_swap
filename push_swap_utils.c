@@ -137,10 +137,10 @@ void	get_index(t_list **pile_a)
 
 void	get_pos(t_list **pile_a)
 {
-	t_list  *start;
+	t_list	*start;
 	int		p;
 
-	p = 0;
+	p = 1;
 	start = (*pile_a);
 	while((*pile_a))
 	{
@@ -150,103 +150,52 @@ void	get_pos(t_list **pile_a)
 	(*pile_a) = start;
 
 }
+int		calc_cost(int idx, int pos, int pos_total)
+{
+	int		cost;
+	int		cost2;
+	int		n;
+	int		n2;
 
-// void	get_index(t_list **pile_a, int idx)
-// {
-// 	t_list	*start;
-// 	t_list	*tmp;
-// 	t_list	*lower;
+	n = 0;
+	n2 = 0;
+	cost = idx - pos;
+	if ((pos_total - pos + idx) < pos_total)
+		cost2 = pos_total - pos + idx;
+	else
+		cost2 = idx - (pos_total + pos );
+	if (cost < 0)
+	{
+		cost *= -1;
+		n = 1;
+	}
+	if (cost2 < 0)
+	{
+		cost2 *= -1;
+		n2 = 1;
+	}
+	if(cost2 <= cost)
+	{
+		if(n2)
+			cost2 /= -1;
+		return(cost2);
+	}
+	if(n)
+		cost /= -1;
+	return(cost);
+}
 
-// 	start = (*pile_a);
-// 	lower = NULL;
-// 	while ((*pile_a)->next)
-// 	{
-// 	tmp = (*pile_a);
-// 		while (tmp)
-// 		{
+void	get_best_cost(t_list **pile)
+{
+	t_list	*start;
+	int		pos_total;
 
-// 			if (tmp->value < (*pile_a)->value && tmp->index < 0)
-// 			{
-// 				if (!lower)
-// 					lower = tmp;
-// 				else if(tmp->value < lower->value )
-// 					lower = tmp;
-// 			}
-// 			if(tmp->next) ;
-// 				tmp = tmp->next;
-
-// 		}
-// 		(*pile_a) = (*pile_a)->next;
-// 	}
-// 		(*pile_a) = start;
-
-// 	if (lower)
-// 	{
-// 		while ((*pile_a)->next)
-// 		{
-// 			if ((*pile_a)->value == lower->value)
-// 			{
-// 				(*pile_a)->index = idx;
-// 				idx++;
-// 				break;
-// 			}
-
-// 			(*pile_a) = (*pile_// void	get_index(t_list **pile_a, int idx)
-// {
-// 	t_list	*start;
-// 	t_list	*tmp;
-// 	t_list	*lower;
-
-// 	start = (*pile_a);
-// 	lower = NULL;
-// 	while ((*pile_a)->next)
-// 	{
-// 	tmp = (*pile_a);
-// 		while (tmp)
-// 		{
-
-// 			if (tmp->value < (*pile_a)->value && tmp->index < 0)
-// 			{
-// 				if (!lower)
-// 					lower = tmp;
-// 				else if(tmp->value < lower->value )
-// 					lower = tmp;
-// 			}
-// 			if(tmp->next) ;
-// 				tmp = tmp->next;
-
-// 		}
-// 		(*pile_a) = (*pile_a)->next;
-// 	}
-// 		(*pile_a) = start;
-
-// 	if (lower)
-// 	{
-// 		while ((*pile_a)->next)
-// 		{
-// 			if ((*pile_a)->value == lower->value)
-// 			{
-// 				(*pile_a)->index = idx;
-// 				idx++;
-// 				break;
-// 			}
-
-// 			(*pile_a) = (*pile_a)->next;
-// 		}
-// 		if ((*pile_a)->value == lower->value)
-// 			{
-// 				(*pile_a) = start;
-// 				get_index(pile_a, idx);
-// 			}
-// 		(*pile_a) = start;
-// 	}
-// }a)->next;
-// 		}
-// 		if ((*pile_a)->value == lower->value)
-// 			{
-// 				(*pile_a) = start;
-// 				get_index(pile_a, idx);
-// 			}
-// 		(*pile_a) = start;
-// 	}
-// }
+	start = (*pile);
+	pos_total = ft_lstlast((*pile))->pos;
+	while((*pile))
+	{
+		(*pile)->cost = calc_cost((*pile)->index, (*pile)->pos, pos_total);
+		(*pile) = (*pile)->next;
+	}
+	(*pile) = start;
+}

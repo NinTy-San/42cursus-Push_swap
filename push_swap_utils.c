@@ -6,7 +6,7 @@
 /*   By: adohou <adohou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 19:39:55 by adohou            #+#    #+#             */
-/*   Updated: 2022/10/13 05:28:54 by adohou           ###   ########.fr       */
+/*   Updated: 2022/10/21 19:13:11 by adohou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,40 +150,40 @@ void	get_pos(t_list **pile_a)
 	(*pile_a) = start;
 
 }
-int		calc_cost(int idx, int pos, int pos_total)
-{
-	int		cost;
-	int		cost2;
-	int		n;
-	int		n2;
+// int		calc_cost(int idx, int pos, int pos_total)
+// {
+// 	int		cost;
+// 	int		cost2;
+// 	int		n;
+// 	int		n2;
 
-	n = 0;
-	n2 = 0;
-	cost = idx - pos;
-	if ((pos_total - pos + idx) < pos_total)
-		cost2 = pos_total - pos + idx;
-	else
-		cost2 = idx - (pos_total + pos );
-	if (cost < 0)
-	{
-		cost *= -1;
-		n = 1;
-	}
-	if (cost2 < 0)
-	{
-		cost2 *= -1;
-		n2 = 1;
-	}
-	if(cost2 <= cost)
-	{
-		if(n2)
-			cost2 /= -1;
-		return(cost2);
-	}
-	if(n)
-		cost /= -1;
-	return(cost);
-}
+// 	n = 0;
+// 	n2 = 0;
+// 	cost = idx - pos;
+// 	if ((pos_total - pos + idx) < pos_total)
+// 		cost2 = pos_total - pos + idx;
+// 	else
+// 		cost2 = idx - (pos_total + pos );
+// 	if (cost < 0)
+// 	{
+// 		cost *= -1;
+// 		n = 1;
+// 	}
+// 	if (cost2 < 0)
+// 	{
+// 		cost2 *= -1;
+// 		n2 = 1;
+// 	}
+// 	if(cost2 <= cost)
+// 	{
+// 		if(n2)
+// 			cost2 /= -1;
+// 		return(cost2);
+// 	}
+// 	if(n)
+// 		cost /= -1;
+// 	return(cost);
+// }
 
 void	get_best_cost(t_list **pile)
 {
@@ -194,8 +194,35 @@ void	get_best_cost(t_list **pile)
 	pos_total = ft_lstlast((*pile))->pos;
 	while((*pile))
 	{
-		(*pile)->cost = calc_cost((*pile)->index, (*pile)->pos, pos_total);
+		if ((*pile)->pos <= pos_total / 2 + 1)
+			(*pile)->cost = (*pile)->pos - 1;
+		else
+			(*pile)->cost = (pos_total - (*pile)->pos + 1);
 		(*pile) = (*pile)->next;
 	}
 	(*pile) = start;
+}
+
+void 	push_n_swap(t_list **pile_a, t_list **pile_b)
+{
+	pb(pile_a, pile_b);
+	rb(pile_b);
+	write(1, "p_s\n", 5);
+}
+
+void	pre_sort(t_list **pile_a, t_list **pile_b)
+{
+	int		size;
+
+	size = ft_lstsize((*pile_a));
+	printf("size = %d\n", size);
+	while((*pile_a))
+	{
+		if ((*pile_a)->index <= size / 2)
+			pb(pile_a, pile_b);
+		else
+			push_n_swap(pile_a, pile_b);
+		// (*pile_a) = (*pile_a)->next;
+	}
+
 }

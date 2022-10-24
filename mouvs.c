@@ -80,7 +80,7 @@ void	reverse_rotate(t_list **pile_a)
 /*simple mouv */
 void	pa(t_list **pile_b, t_list **pile_a)
 {
-	push(pile_a, pile_b);
+	push(pile_b, pile_a);
 	write(1, "pa\n", 3);
 }
 

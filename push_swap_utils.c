@@ -134,6 +134,18 @@ void	get_index(t_list **pile_a)
 	}
 		(*pile_a) = start;
 }
+void	reset_index(t_list **pile_a)
+{
+	t_list	*start;
+
+	start = (*pile_a);
+	while ((*pile_a))
+	{
+		(*pile_a)->index = 1;
+		(*pile_a) = (*pile_a)->next;
+	}
+		(*pile_a) = start;
+}
 
 void	get_pos(t_list **pile_a)
 {
@@ -205,24 +217,42 @@ void	get_best_cost(t_list **pile)
 
 void 	push_n_swap(t_list **pile_a, t_list **pile_b)
 {
-	pb(pile_a, pile_b);
-	rb(pile_b);
-	write(1, "p_s\n", 5);
+		pb(pile_a, pile_b);
+		rb(pile_b);
 }
 
 void	pre_sort(t_list **pile_a, t_list **pile_b)
 {
 	int		size;
+	int		half;
+	int		quarter;
+	int		nb_push;
 
 	size = ft_lstsize((*pile_a));
-	printf("size = %d\n", size);
+	half = size / 2;
+	printf("half = %d \n", half);
+	quarter = half / 2;
+	printf("quarter = %d \n", quarter);
+	nb_push = 0;
 	while((*pile_a))
 	{
-		if ((*pile_a)->index <= size / 2)
+		if(nb_push == size / 2)
+		{
+			quarter += half;
+			half = size;
+		}
+		if ((*pile_a)->index <= quarter)
+		{
 			pb(pile_a, pile_b);
-		else
+			nb_push++;
+		}
+		else if ((*pile_a)->index <= half)
+		{
 			push_n_swap(pile_a, pile_b);
-		// (*pile_a) = (*pile_a)->next;
+			nb_push++;
+		}
+		else
+			ra(pile_a);
 	}
 
 }

@@ -54,7 +54,7 @@ void	get_pos(t_list **pile_a);
 // int		calc_cost(int idx, int pos, int pos_total);
 void	get_best_cost(t_list **pile);
 void	pre_sort(t_list **pile_a, t_list **pile_b);
-
+void	reset_index(t_list **pile_a);
 
 
 

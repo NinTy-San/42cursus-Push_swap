@@ -101,4 +101,3 @@ void	ft_lst_free(t_list **pile)
 		(*pile) = tmp;
 	}
 }
-

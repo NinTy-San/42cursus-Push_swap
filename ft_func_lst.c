@@ -6,7 +6,7 @@
 /*   By: adohou <adohou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 19:21:21 by adohou            #+#    #+#             */
-/*   Updated: 2022/10/20 15:49:17 by adohou           ###   ########.fr       */
+/*   Updated: 2022/10/24 16:32:14 by adohou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,10 @@ t_list	*ft_lstnew(long value)
 		return (NULL);
 	lst->value = value;
 	lst->index = 1;
+	lst->p_idx = 1;
 	lst->pos = 1;
 	lst->cost = 0;
+	lst->p_cost = 0;
 	lst->next = NULL;
 	return (lst);
 }

@@ -6,7 +6,7 @@
 /*   By: adohou <adohou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 19:39:55 by adohou            #+#    #+#             */
-/*   Updated: 2022/10/21 19:13:11 by adohou           ###   ########.fr       */
+/*   Updated: 2022/10/24 19:40:50 by adohou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,18 +134,7 @@ void	get_index(t_list **pile_a)
 	}
 		(*pile_a) = start;
 }
-void	reset_index(t_list **pile_a)
-{
-	t_list	*start;
 
-	start = (*pile_a);
-	while ((*pile_a))
-	{
-		(*pile_a)->index = 1;
-		(*pile_a) = (*pile_a)->next;
-	}
-		(*pile_a) = start;
-}
 
 void	get_pos(t_list **pile_a)
 {
@@ -162,41 +151,6 @@ void	get_pos(t_list **pile_a)
 	(*pile_a) = start;
 
 }
-// int		calc_cost(int idx, int pos, int pos_total)
-// {
-// 	int		cost;
-// 	int		cost2;
-// 	int		n;
-// 	int		n2;
-
-// 	n = 0;
-// 	n2 = 0;
-// 	cost = idx - pos;
-// 	if ((pos_total - pos + idx) < pos_total)
-// 		cost2 = pos_total - pos + idx;
-// 	else
-// 		cost2 = idx - (pos_total + pos );
-// 	if (cost < 0)
-// 	{
-// 		cost *= -1;
-// 		n = 1;
-// 	}
-// 	if (cost2 < 0)
-// 	{
-// 		cost2 *= -1;
-// 		n2 = 1;
-// 	}
-// 	if(cost2 <= cost)
-// 	{
-// 		if(n2)
-// 			cost2 /= -1;
-// 		return(cost2);
-// 	}
-// 	if(n)
-// 		cost /= -1;
-// 	return(cost);
-// }
-
 void	get_best_cost(t_list **pile)
 {
 	t_list	*start;
@@ -230,29 +184,112 @@ void	pre_sort(t_list **pile_a, t_list **pile_b)
 
 	size = ft_lstsize((*pile_a));
 	half = size / 2;
-	printf("half = %d \n", half);
 	quarter = half / 2;
-	printf("quarter = %d \n", quarter);
 	nb_push = 0;
-	while((*pile_a))
+	while(nb_push < size - 1)
 	{
-		if(nb_push == size / 2)
+		if(nb_push >= size / 2)
 		{
-			quarter += half;
-			half = size;
-		}
-		if ((*pile_a)->index <= quarter)
-		{
-			pb(pile_a, pile_b);
-			nb_push++;
-		}
-		else if ((*pile_a)->index <= half)
-		{
-			push_n_swap(pile_a, pile_b);
-			nb_push++;
+			if((*pile_a)->index == size)
+				ra(pile_a);
+			else if ((*pile_a)->index > half + quarter && (*pile_a)->index <= size)
+			{
+				pb(pile_a, pile_b);
+				nb_push++;
+			}
+			else
+			{
+				push_n_swap(pile_a, pile_b);
+				nb_push++;
+			}
 		}
 		else
-			ra(pile_a);
+		{
+			if((*pile_a)->index == size)
+				ra(pile_a);
+			else if ((*pile_a)->index > half && (*pile_a)->index <= half + quarter)
+			{
+				pb(pile_a, pile_b);
+				nb_push++;
+			}
+			else if ((*pile_a)->index > quarter && (*pile_a)->index <= half)
+			{
+				push_n_swap(pile_a, pile_b);
+				nb_push++;
+			}
+			else
+				ra(pile_a);
+		}
 	}
-
+	// if((*pile_a)->index > (*pile_a)->next->index)
+	// 	ra(pile_a);
 }
+
+
+// int	calc_pcost(int idx, int pos, int pos_total)
+// {	int		cost;
+// 	int		cost2;
+// 	int		n;
+// 	int		n2;
+
+// 	n = 0;
+// 	n2 = 0;
+// 	cost = idx - pos;
+// 	if ((pos_total - pos + idx) < pos_total)
+// 		cost2 = pos_total - pos + idx;
+// 	else
+// 		cost2 = idx - (pos_total + pos );
+// 	if (cost < 0)
+// 	{
+// 		cost *= -1;
+// 		n = 1;
+// 	}
+// 	if (cost2 < 0)
+// 	{
+// 		cost2 *= -1;
+// 		n2 = 1;
+// 	}
+// 	if(cost2 <= cost)
+// 	{
+// 		if(n2)
+// 			cost2 /= -1;
+// 		return(cost2);
+// 	}
+// 	if(n)
+// 		cost /= -1;
+// 	return(cost);
+// }
+// void	get_pcost(t_list **pile)
+// {
+// 	t_list	*start;
+// 	int		pos_total;
+
+// 	start = (*pile);
+// 	pos_total = ft_lstlast((*pile))->pos;
+// 	while((*pile))
+// 	{
+// 		(*pile)->p_cost = calc_pcost((*pile)->p_idx, (*pile)->pos, pos_total);
+// 		(*pile) = (*pile)->next;
+// 	}
+// 	(*pile) = start;
+// }
+
+// void	get_pidx(t_list **pile_a)
+// {
+// 	t_list	*start;
+// 	t_list	*tmp;
+
+// 	start = (*pile_a);
+// 	while ((*pile_a))
+// 	{
+// 	tmp = start;
+// 		while (tmp)
+// 		{
+// 			if (tmp->value < (*pile_a)->value)
+// 				(*pile_a)->p_idx += 1;
+// 			tmp = tmp->next;
+// 		}
+// 		(*pile_a) = (*pile_a)->next;
+// 	}
+// 		(*pile_a) = start;
+// }

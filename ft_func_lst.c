@@ -21,9 +21,10 @@ t_list	*ft_lstnew(long value)
 		return (NULL);
 	lst->value = value;
 	lst->index = 1;
-	lst->id_sort = 1;
+	lst->p_idx = 1;
 	lst->pos = 1;
 	lst->cost = 0;
+	lst->p_cost = 0;
 	lst->next = NULL;
 	return (lst);
 }

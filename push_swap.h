@@ -28,9 +28,10 @@ typedef struct s_list
 {
 	long			value;
 	int				index;
-	int				id_sort;
+	int				p_idx;
 	int				pos;
 	int				cost;
+	int				p_cost;
 	struct s_list	*next;
 } t_list;
 
@@ -43,8 +44,6 @@ void	ft_lstdelone(t_list *lst);
 void	ft_lstclear(t_list **lst);
 int	ft_lstsize(t_list *lst);
 void	ft_lst_free(t_list **pile);
-void ft_print_lst(char *msg, t_list *pile);
-
 
 // functions utils
 long	ft_atoi(const char *nptr);
@@ -58,7 +57,7 @@ void	get_pos(t_list **pile_a);
 // void	get_pcost(t_list **pile);
 void	get_best_cost(t_list **pile);
 void	pre_sort(t_list **pile_a, t_list **pile_b);
-void	get_idsort(t_list **pile);
+// void	get_pidx(t_list **pile_a);
 
 
 

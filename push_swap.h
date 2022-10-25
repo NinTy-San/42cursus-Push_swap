@@ -6,7 +6,7 @@
 /*   By: adohou <adohou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 22:44:42 by adohou            #+#    #+#             */
-/*   Updated: 2022/10/24 16:44:00 by adohou           ###   ########.fr       */
+/*   Updated: 2022/10/25 23:36:41 by adohou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,9 @@ typedef struct s_list
 {
 	long			value;
 	int				index;
-	int				p_idx;
+	int				id_sort;
 	int				pos;
 	int				cost;
-	int				p_cost;
 	struct s_list	*next;
 } t_list;
 
@@ -57,13 +56,13 @@ void	get_pos(t_list **pile_a);
 // void	get_pcost(t_list **pile);
 void	get_best_cost(t_list **pile);
 void	pre_sort(t_list **pile_a, t_list **pile_b);
-// void	get_pidx(t_list **pile_a);
+void	get_id_sort(t_list **pile);
 
 
 
 // functions mouvs
 void	pb(t_list **pile_a, t_list **pile_b);
-void	pa(t_list **pile_b, t_list **pile_a);
+void	pa(t_list **pile_a, t_list **pile_b);
 void	ra(t_list **pile_a);
 void	rb(t_list **pile_b);
 void	sa(t_list **pile_a);

@@ -6,7 +6,7 @@
 /*   By: adohou <adohou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 22:44:19 by adohou            #+#    #+#             */
-/*   Updated: 2022/10/24 18:27:25 by adohou           ###   ########.fr       */
+/*   Updated: 2022/10/25 23:26:00 by adohou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void ft_print_lst(char *msg, t_list *pile)
 	printf("%s", msg);
 	while(pile)
 	{
-		printf("val = %ld | idx = %d | pos = %d | cost = %d \n", pile->value, pile->index, pile->pos, pile->cost);
+		printf("val = %ld | idx = %d | pos = %d | id = %d | cost = %d \n", pile->value, pile->index, pile->pos, pile->id_sort, pile->cost);
 		pile = pile->next;
 	}
 	pile = start;
@@ -61,7 +61,8 @@ int main (int ac, char **av)
 	// get_pos(&pile_b);
 	// get_best_cost(&pile_b);
 	// ft_print_lst("pile a = \n", pile_a);
-	// ft_print_lst("pile b = \n", pile_b);
+	// get_id_sort(&pile_b);
+	ft_print_lst("pile b = \n", pile_b);
 
 	ft_lst_free(&pile_a);
 	ft_lst_free(&pile_b);

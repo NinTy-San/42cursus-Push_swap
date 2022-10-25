@@ -21,7 +21,7 @@ void	push(t_list **pile_a, t_list **pile_b)
 		return ;
 	tmp = (*pile_a)->next;
 	(*pile_a)->next = NULL;
-	ft_lstadd_front((pile_b), (*pile_a));
+	ft_lstadd_front(pile_b, (*pile_a));
 	(*pile_a) = tmp;
 }
 

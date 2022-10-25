@@ -160,7 +160,7 @@ void	get_best_cost(t_list **pile)
 	pos_total = ft_lstlast((*pile))->pos;
 	while((*pile))
 	{
-		if ((*pile)->pos <= pos_total / 2 + 1)
+		if ((*pile)->pos <= (pos_total / 2) + 1)
 			(*pile)->cost = (*pile)->pos - 1;
 		else
 			(*pile)->cost = (pos_total - (*pile)->pos + 1);
@@ -175,51 +175,135 @@ void 	push_n_swap(t_list **pile_a, t_list **pile_b)
 		rb(pile_b);
 }
 
+void	set_big_up(t_list **pile_b)
+{
+	t_list	*tmp;
+	int		len;
+	int		mouvs;
+
+	tmp = (*pile_b);
+	len = ft_lstsize((*pile_b));
+	while (tmp)
+	{
+		if(tmp->id_sort == len)
+			break ;
+		tmp = tmp->next;
+	}
+	mouvs = tmp->cost;
+	printf("bigest = %ld\n", tmp->value);
+	if(mouvs)
+	{
+		if(tmp->pos <= len / 2)
+			while (mouvs--)
+				rb(pile_b);
+		else
+			while(mouvs--)
+				rrb(pile_b);
+	}
+}
+int chunk_sort(t_list  **pile_b,t_list **pile_a)
+{
+	t_list	*tmp;
+	t_list	*start;
+	int		bool;
+
+	start = (*pile_b);
+	bool = 1;
+	while((*pile_b)->next)
+	{
+		tmp = (*pile_b);
+		if(tmp->index < (*pile_b)->next->index)
+		{
+			bool = 0;
+			break ;
+		}
+		(*pile_b) = (*pile_b)->next;
+
+	}
+	(*pile_b) = start;
+	if(bool)
+		return(bool);
+	get_idsort(pile_b);
+	get_pos(pile_b);
+	get_best_cost(pile_b);
+	set_big_up(pile_b);
+	pa(pile_b, pile_a);
+	ra(pile_a);
+	return(bool);
+}
+
+int	sort_first_half(t_list **pile_a, t_list **pile_b, int nb_push, int size)
+{
+	int		half;
+	int		quarter;
+
+	half = size / 2;
+	quarter = half / 2;
+	if((*pile_a)->index == size)
+		ra(pile_a);
+	else if ((*pile_a)->index > half && (*pile_a)->index <= half + quarter)
+	{
+		pb(pile_a, pile_b);
+		nb_push++;
+	}
+	else if ((*pile_a)->index > quarter && (*pile_a)->index <= half)
+	{
+		push_n_swap(pile_a, pile_b);
+		nb_push++;
+	}
+		else
+	ra(pile_a);
+	return(nb_push);
+}
+
+int	sort_scd_half(t_list **pile_a, t_list **pile_b, int nb_push, int size)
+{
+	int		half;
+	int		quarter;
+
+	half = size / 2;
+	quarter = half / 2;
+	if((*pile_a)->index == size)
+		ra(pile_a);
+	else if ((*pile_a)->index > half + quarter && (*pile_a)->index <= size)
+	{
+		pb(pile_a, pile_b);
+		nb_push++;
+	}
+	else
+	{
+		push_n_swap(pile_a, pile_b);
+		nb_push++;
+	}
+	return(nb_push);
+}
+
 void	pre_sort(t_list **pile_a, t_list **pile_b)
 {
 	int		size;
 	int		half;
 	int		quarter;
 	int		nb_push;
+	int		bool;
 
 	size = ft_lstsize((*pile_a));
 	half = size / 2;
 	quarter = half / 2;
 	nb_push = 0;
+	bool = 0;
 	while(nb_push < size - 1)
 	{
-		if(nb_push >= size / 2)
+		if(nb_push == quarter && !bool)
 		{
-			if((*pile_a)->index == size)
-				ra(pile_a);
-			else if ((*pile_a)->index > half + quarter && (*pile_a)->index <= size)
-			{
-				pb(pile_a, pile_b);
-				nb_push++;
-			}
-			else
-			{
-				push_n_swap(pile_a, pile_b);
-				nb_push++;
-			}
+			bool = chunk_sort(pile_b, pile_a);
+			if(!bool)
+				nb_push--;
 		}
+		if(nb_push >= half)
+			nb_push = sort_scd_half(pile_a, pile_b, nb_push, size);
 		else
-		{
-			if((*pile_a)->index == size)
-				ra(pile_a);
-			else if ((*pile_a)->index > half && (*pile_a)->index <= half + quarter)
-			{
-				pb(pile_a, pile_b);
-				nb_push++;
-			}
-			else if ((*pile_a)->index > quarter && (*pile_a)->index <= half)
-			{
-				push_n_swap(pile_a, pile_b);
-				nb_push++;
-			}
-			else
-				ra(pile_a);
-		}
+			nb_push = sort_first_half(pile_a, pile_b, nb_push, size);
+
 	}
 	// if((*pile_a)->index > (*pile_a)->next->index)
 	// 	ra(pile_a);
@@ -274,22 +358,22 @@ void	pre_sort(t_list **pile_a, t_list **pile_b)
 // 	(*pile) = start;
 // }
 
-// void	get_pidx(t_list **pile_a)
-// {
-// 	t_list	*start;
-// 	t_list	*tmp;
+void	get_idsort(t_list **pile)
+{
+	t_list	*start;
+	t_list	*tmp;
 
-// 	start = (*pile_a);
-// 	while ((*pile_a))
-// 	{
-// 	tmp = start;
-// 		while (tmp)
-// 		{
-// 			if (tmp->value < (*pile_a)->value)
-// 				(*pile_a)->p_idx += 1;
-// 			tmp = tmp->next;
-// 		}
-// 		(*pile_a) = (*pile_a)->next;
-// 	}
-// 		(*pile_a) = start;
-// }
+	start = (*pile);
+	while ((*pile))
+	{
+	tmp = start;
+		while (tmp)
+		{
+			if (tmp->value < (*pile)->value)
+				(*pile)->id_sort += 1;
+			tmp = tmp->next;
+		}
+		(*pile) = (*pile)->next;
+	}
+		(*pile) = start;
+}

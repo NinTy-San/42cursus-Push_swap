@@ -20,7 +20,7 @@ void ft_print_lst(char *msg, t_list *pile)
 	printf("%s", msg);
 	while(pile)
 	{
-		printf("val = %ld | idx = %d | pos = %d | cost = %d \n", pile->value, pile->index, pile->pos, pile->cost);
+		printf("val = %ld | idx = %d | pos = %d | id = %d | cost = %d \n", pile->value, pile->index, pile->pos, pile->id_sort, pile->cost);
 		pile = pile->next;
 	}
 	pile = start;
@@ -42,7 +42,7 @@ int main (int ac, char **av)
 	// ft_print_lst("pile a = \n", pile_a);
 	get_index(&pile_a);
 	get_pos(&pile_a);
-	get_best_cost(&pile_a);
+	// get_best_cost(&pile_a);
 	// printf("-------------\n");
 	// ft_print_lst("after get_index pile a = \n", pile_a);
 	// get_pos(&pile_a);
@@ -60,8 +60,8 @@ int main (int ac, char **av)
 	// }
 	// get_pos(&pile_b);
 	// get_best_cost(&pile_b);
-	// ft_print_lst("pile a = \n", pile_a);
-	// ft_print_lst("pile b = \n", pile_b);
+	ft_print_lst("pile a = \n", pile_a);
+	ft_print_lst("pile b = \n", pile_b);
 
 	ft_lst_free(&pile_a);
 	ft_lst_free(&pile_b);

@@ -6,7 +6,7 @@
 /*   By: adohou <adohou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 22:44:19 by adohou            #+#    #+#             */
-/*   Updated: 2022/10/25 23:26:00 by adohou           ###   ########.fr       */
+/*   Updated: 2022/10/26 18:48:59 by adohou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int main (int ac, char **av)
 	// get_best_cost(&pile_b);
 	// ft_print_lst("pile a = \n", pile_a);
 	// get_id_sort(&pile_b);
-	ft_print_lst("pile b = \n", pile_b);
+	// ft_print_lst("pile b = \n", pile_b);
 
 	ft_lst_free(&pile_a);
 	ft_lst_free(&pile_b);

@@ -6,7 +6,7 @@
 /*   By: adohou <adohou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 19:39:55 by adohou            #+#    #+#             */
-/*   Updated: 2022/10/25 23:52:51 by adohou           ###   ########.fr       */
+/*   Updated: 2022/10/26 18:53:04 by adohou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -244,23 +244,26 @@ int	sort_first_half(t_list **pile_a, t_list **pile_b, int nb_push, int size)
 
 void	set_small_up(t_list **pile_b)
 {
-	t_list	*tmp;
+	t_list	*start;
 	int		len;
 	int		mouvs;
+	int		smallest;
 
-	tmp = (*pile_b);
+	start = (*pile_b);
 	len = ft_lstsize((*pile_b));
-	while (tmp)
+	while ((*pile_b))
 	{
-		if(tmp->id_sort == 1)
+		if((*pile_b)->id_sort == 1)
 			break ;
-		tmp = tmp->next;
+		(*pile_b) = (*pile_b)->next;
 	}
-	mouvs = tmp->cost;
-	printf("smallest = %ld\n", tmp->value);
+	mouvs = (*pile_b)->cost;
+	smallest = (*pile_b)->pos;
+	// printf("smallest = %ld\n", (*pile_b)->value);
+	(*pile_b) = start;
 	if(mouvs)
 	{
-		if(tmp->pos <= len / 2)
+		if(smallest <= len / 2)
 			while (mouvs--)
 				rb(pile_b);
 		else
@@ -268,25 +271,38 @@ void	set_small_up(t_list **pile_b)
 				rrb(pile_b);
 	}
 }
+void	reset_id_sort(t_list **pile)
+{
+	t_list	*start;
 
-void	get_id_sort(t_list **pile_a)
+	start = (*pile);
+	while ((*pile))
+	{
+		(*pile)->id_sort = 1;
+		(*pile) = (*pile)->next;
+	}
+	(*pile) = start;
+}
+
+void	get_id_sort(t_list **pile)
 {
 	t_list	*start;
 	t_list	*tmp;
 
-	start = (*pile_a);
-	while ((*pile_a))
+	reset_id_sort(pile);
+	start = (*pile);
+	while ((*pile))
 	{
 	tmp = start;
 		while (tmp)
 		{
-			if (tmp->value < (*pile_a)->value)
-				(*pile_a)->id_sort += 1;
+			if (tmp->value < (*pile)->value)
+				(*pile)->id_sort += 1;
 			tmp = tmp->next;
 		}
-		(*pile_a) = (*pile_a)->next;
+		(*pile) = (*pile)->next;
 	}
-		(*pile_a) = start;
+		(*pile) = start;
 }
 
 void	pre_sort(t_list **pile_a, t_list **pile_b)
@@ -308,7 +324,7 @@ void	pre_sort(t_list **pile_a, t_list **pile_b)
 			nb_push = sort_first_half(pile_a, pile_b, nb_push, size);
 
 	}
-	while (nb_push--)
+	while (pile_b)
 	{
 		get_id_sort(pile_b);
 		get_pos(pile_b);

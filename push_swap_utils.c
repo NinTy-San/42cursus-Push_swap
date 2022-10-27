@@ -6,7 +6,7 @@
 /*   By: adohou <adohou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 19:39:55 by adohou            #+#    #+#             */
-/*   Updated: 2022/10/26 18:53:04 by adohou           ###   ########.fr       */
+/*   Updated: 2022/10/27 22:43:11 by adohou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,7 +182,7 @@ int	sort_scd_half(t_list **pile_a, t_list **pile_b, int nb_push, int size)
 
 	half = size / 2;
 	quarter = half / 2;
-	if((*pile_a)->index == size)
+	if((*pile_a)->index == size || (*pile_a)->index == 1)
 		ra(pile_a);
 	else if ((*pile_a)->index > half + quarter && (*pile_a)->index <= size)
 	{
@@ -204,7 +204,7 @@ int	sort_first_half(t_list **pile_a, t_list **pile_b, int nb_push, int size)
 
 	half = size / 2;
 	quarter = half / 2;
-	if((*pile_a)->index == size)
+	if((*pile_a)->index == size || (*pile_a)->index == 1)
 		ra(pile_a);
 	else if ((*pile_a)->index > half && (*pile_a)->index <= half + quarter)
 	{
@@ -221,26 +221,7 @@ int	sort_first_half(t_list **pile_a, t_list **pile_b, int nb_push, int size)
 	return(nb_push);
 }
 
-/* void	pre_sort(t_list **pile_a, t_list **pile_b)
-{
-	int		size;
-	int		half;
-	// int		quarter;
-	int		nb_push;
 
-	size = ft_lstsize((*pile_a));
-	half = size / 2;
-	// quarter = half / 2;
-	nb_push = 0;
-	// res = 1;
-	while(nb_push < half)
-		nb_push = sort_scd_half(pile_a, pile_b, nb_push, size);
-	while (nb_push < size - 1)
-		nb_push = sort_first_half(pile_a, pile_b, nb_push, size);
-
-	// if((*pile_a)->index > (*pile_a)->next->index)
-	// 	ra(pile_a);
-} */
 
 void	set_small_up(t_list **pile_b)
 {
@@ -259,7 +240,6 @@ void	set_small_up(t_list **pile_b)
 	}
 	mouvs = (*pile_b)->cost;
 	smallest = (*pile_b)->pos;
-	// printf("smallest = %ld\n", (*pile_b)->value);
 	(*pile_b) = start;
 	if(mouvs)
 	{
@@ -324,15 +304,23 @@ void	pre_sort(t_list **pile_a, t_list **pile_b)
 			nb_push = sort_first_half(pile_a, pile_b, nb_push, size);
 
 	}
-	while (pile_b)
+	while(nb_push < size - 2)
 	{
-		get_id_sort(pile_b);
-		get_pos(pile_b);
-		get_best_cost(pile_b);
-		set_small_up(pile_b);
-		pa(pile_a, pile_b);
-		ra(pile_a);
+		if(nb_push >= half)
+			nb_push = sort_scd_half(pile_a, pile_b, nb_push, size);
+		else
+			nb_push = sort_first_half(pile_a, pile_b, nb_push, size);
+
 	}
+	// while (nb_push--)
+	// {
+	// 	get_id_sort(pile_b);
+	// 	get_pos(pile_b);
+	// 	get_best_cost(pile_b);
+	// 	set_small_up(pile_b);
+	// 	pa(pile_a, pile_b);
+	// 	ra(pile_a);
+	// }
 
 
 
@@ -389,3 +377,23 @@ void	pre_sort(t_list **pile_a, t_list **pile_b)
 // 	(*pile) = start;
 // }
 
+// void	pre_sort(t_list **pile_a, t_list **pile_b)
+// {
+// 	int		size;
+// 	int		half;
+// 	// int		quarter;
+// 	int		nb_push;
+
+// 	size = ft_lstsize((*pile_a));
+// 	half = size / 2;
+// 	// quarter = half / 2;
+// 	nb_push = 0;
+// 	// res = 1;
+// 	while(nb_push < half)
+// 		nb_push = sort_scd_half(pile_a, pile_b, nb_push, size);
+// 	while (nb_push < size - 1)
+// 		nb_push = sort_first_half(pile_a, pile_b, nb_push, size);
+
+// 	// if((*pile_a)->index > (*pile_a)->next->index)
+// 	// 	ra(pile_a);
+// }

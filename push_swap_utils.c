@@ -6,7 +6,7 @@
 /*   By: adohou <adohou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 19:39:55 by adohou            #+#    #+#             */
-/*   Updated: 2022/10/27 22:43:11 by adohou           ###   ########.fr       */
+/*   Updated: 2022/11/02 18:57:15 by adohou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -283,6 +283,23 @@ void	get_id_sort(t_list **pile)
 		(*pile) = (*pile)->next;
 	}
 		(*pile) = start;
+}
+
+int		find_idx(int b_idx, t_list **pile_a)
+{
+	t_list	*start;
+	int		tmp;
+
+	start = (*pile_a);
+	tmp = 0;
+	while((*pile_a))
+	{
+		if((*pile_a)->index > b_idx && ((*pile_a)->index < tmp || !tmp))
+			tmp = (*pile_a)->index;
+		(*pile_a) = (*pile_a)->next;
+	}
+	(*pile_a) = start;
+	return(tmp);
 }
 
 void	pre_sort(t_list **pile_a, t_list **pile_b)

@@ -6,7 +6,7 @@
 /*   By: adohou <adohou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 19:39:55 by adohou            #+#    #+#             */
-/*   Updated: 2022/11/02 18:57:15 by adohou           ###   ########.fr       */
+/*   Updated: 2022/11/03 22:52:42 by adohou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,8 +221,6 @@ int	sort_first_half(t_list **pile_a, t_list **pile_b, int nb_push, int size)
 	return(nb_push);
 }
 
-
-
 void	set_idx_up(t_list **pile, int idx)
 {
 	t_list	*start;
@@ -242,10 +240,10 @@ void	set_idx_up(t_list **pile, int idx)
 	{
 		if(pos <= len / 2)
 			while (mouvs--)
-				rb(pile);
+				ra(pile);
 		else
 			while(mouvs--)
-				rrb(pile);
+				rra(pile);
 	}
 }
 void	set_small_cost_up(t_list **pile)
@@ -264,7 +262,7 @@ void	set_small_cost_up(t_list **pile)
 		tmp = start;
 		while(tmp)
 		{
-			if( tmp->u_cost < smallest->u_cost )
+			if( tmp->u_cost <= smallest->u_cost )
 				smallest = tmp;
 			tmp = tmp->next;
 		}
@@ -282,39 +280,7 @@ void	set_small_cost_up(t_list **pile)
 				rrb(pile);
 	}
 }
-/* void	reset_id_sort(t_list **pile)
-{
-	t_list	*start;
 
-	start = (*pile);
-	while ((*pile))
-	{
-		(*pile)->id_sort = 1;
-		(*pile) = (*pile)->next;
-	}
-	(*pile) = start;
-}
-
-void	get_id_sort(t_list **pile)
-{
-	t_list	*start;
-	t_list	*tmp;
-
-	reset_id_sort(pile);
-	start = (*pile);
-	while ((*pile))
-	{
-	tmp = start;
-		while (tmp)
-		{
-			if (tmp->value < (*pile)->value)
-				(*pile)->id_sort += 1;
-			tmp = tmp->next;
-		}
-		(*pile) = (*pile)->next;
-	}
-		(*pile) = start;
-} */
 
 int		find_idx(int b_idx, t_list **pile_a)
 {
@@ -322,7 +288,6 @@ int		find_idx(int b_idx, t_list **pile_a)
 	int		tmp;
 
 	start = (*pile_a);
-	// tmp = (*pile_a);
 	tmp = 0;
 	while((*pile_a))
 	{
@@ -358,12 +323,10 @@ void	pre_sort(t_list **pile_a, t_list **pile_b)
 {
 	int		size;
 	int		half;
-	// int		quarter;
 	int		nb_push;
 
 	size = ft_lstsize((*pile_a));
 	half = size / 2;
-	// quarter = half / 2;
 	nb_push = 0;
 	while(nb_push < half)
 	{
@@ -371,7 +334,6 @@ void	pre_sort(t_list **pile_a, t_list **pile_b)
 			nb_push = sort_scd_half(pile_a, pile_b, nb_push, size);
 		else
 			nb_push = sort_first_half(pile_a, pile_b, nb_push, size);
-
 	}
 	while(nb_push < size - 2)
 	{
@@ -379,22 +341,7 @@ void	pre_sort(t_list **pile_a, t_list **pile_b)
 			nb_push = sort_scd_half(pile_a, pile_b, nb_push, size);
 		else
 			nb_push = sort_first_half(pile_a, pile_b, nb_push, size);
-
 	}
-	// while (nb_push--)
-	// {
-	// 	get_id_sort(pile_b);
-	// 	get_pos(pile_b);
-	// 	get_best_cost(pile_b);
-	// 	set_small_up(pile_b);
-	// 	pa(pile_a, pile_b);
-	// 	ra(pile_a);
-	// }
-
-
-
-	if((*pile_a)->index > (*pile_a)->next->index)
-		ra(pile_a);
 }
 
 void	sort_pile(t_list **pile_a, t_list **pile_b)
@@ -409,13 +356,9 @@ void	sort_pile(t_list **pile_a, t_list **pile_b)
 		get_best_cost(pile_b);
 		get_ultimate_cost(pile_a, pile_b);
 		get_best_cost(pile_a);
-		ft_print_lst("ultm cost =\n", (*pile_b));
 		set_small_cost_up(pile_b);
 		set_idx_up(pile_a, find_idx((*pile_b)->index, pile_a));
-		printf("push = %ld\n", (*pile_b)->value);
 		pa(pile_a, pile_b);
-		// tmp = tmp->next;
-		// printf("tmp = %ld\n", tmp->value);
 	}
 		get_pos(pile_a);
 		get_best_cost(pile_a);
@@ -423,71 +366,17 @@ void	sort_pile(t_list **pile_a, t_list **pile_b)
 
 }
 
-// int	calc_pcost(int idx, int pos, int pos_total)
-// {	int		cost;
-// 	int		cost2;
-// 	int		n;
-// 	int		n2;
+/* void	sort_three(t_list **pile_a)
+{
+	t_list	*start;
+	t_list	*tmp;
 
-// 	n = 0;
-// 	n2 = 0;
-// 	cost = idx - pos;
-// 	if ((pos_total - pos + idx) < pos_total)
-// 		cost2 = pos_total - pos + idx;
-// 	else
-// 		cost2 = idx - (pos_total + pos );
-// 	if (cost < 0)
-// 	{
-// 		cost *= -1;
-// 		n = 1;
-// 	}
-// 	if (cost2 < 0)
-// 	{
-// 		cost2 *= -1;
-// 		n2 = 1;
-// 	}
-// 	if(cost2 <= cost)
-// 	{
-// 		if(n2)
-// 			cost2 /= -1;
-// 		return(cost2);
-// 	}
-// 	if(n)
-// 		cost /= -1;
-// 	return(cost);
-// }
-// void	get_pcost(t_list **pile)
-// {
-// 	t_list	*start;
-// 	int		pos_total;
-
-// 	start = (*pile);
-// 	pos_total = ft_lstlast((*pile))->pos;
-// 	while((*pile))
-// 	{
-// 		(*pile)->p_cost = calc_pcost((*pile)->p_idx, (*pile)->pos, pos_total);
-// 		(*pile) = (*pile)->next;
-// 	}
-// 	(*pile) = start;
-// }
-
-// void	pre_sort(t_list **pile_a, t_list **pile_b)
-// {
-// 	int		size;
-// 	int		half;
-// 	// int		quarter;
-// 	int		nb_push;
-
-// 	size = ft_lstsize((*pile_a));
-// 	half = size / 2;
-// 	// quarter = half / 2;
-// 	nb_push = 0;
-// 	// res = 1;
-// 	while(nb_push < half)
-// 		nb_push = sort_scd_half(pile_a, pile_b, nb_push, size);
-// 	while (nb_push < size - 1)
-// 		nb_push = sort_first_half(pile_a, pile_b, nb_push, size);
-
-// 	// if((*pile_a)->index > (*pile_a)->next->index)
-// 	// 	ra(pile_a);
-// }
+	start = (*pile_a);
+	tmp = (*pile_a)->next;
+	while(*pile_a)
+	{
+		if(tmp->value >= (*pile_a)->value)
+			tmp = tmp->next;
+		(*pile_a) = (*pile_a)->next;
+	}
+} */

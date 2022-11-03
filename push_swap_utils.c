@@ -136,19 +136,19 @@ void	get_index(t_list **pile_a)
 }
 
 
-void	get_pos(t_list **pile_a)
+void	get_pos(t_list **pile)
 {
 	t_list	*start;
 	int		p;
 
 	p = 1;
-	start = (*pile_a);
-	while((*pile_a))
+	start = (*pile);
+	while((*pile))
 	{
-		(*pile_a)->pos = p++;
-		(*pile_a) = (*pile_a)->next;
+		(*pile)->pos = p++;
+		(*pile) = (*pile)->next;
 	}
-	(*pile_a) = start;
+	(*pile) = start;
 
 }
 void	get_best_cost(t_list **pile)
@@ -223,35 +223,66 @@ int	sort_first_half(t_list **pile_a, t_list **pile_b, int nb_push, int size)
 
 
 
-void	set_small_up(t_list **pile_b)
+void	set_idx_up(t_list **pile, int idx)
 {
 	t_list	*start;
 	int		len;
 	int		mouvs;
-	int		smallest;
+	int		pos;
 
-	start = (*pile_b);
-	len = ft_lstsize((*pile_b));
-	while ((*pile_b))
-	{
-		if((*pile_b)->id_sort == 1)
-			break ;
-		(*pile_b) = (*pile_b)->next;
-	}
-	mouvs = (*pile_b)->cost;
-	smallest = (*pile_b)->pos;
-	(*pile_b) = start;
+	start = (*pile);
+	len = ft_lstsize((*pile));
+	while ((*pile)->index != idx)
+		(*pile) = (*pile)->next;
+
+	mouvs = (*pile)->cost;
+	pos = (*pile)->pos;
+	(*pile) = start;
 	if(mouvs)
 	{
-		if(smallest <= len / 2)
+		if(pos <= len / 2)
 			while (mouvs--)
-				rb(pile_b);
+				rb(pile);
 		else
 			while(mouvs--)
-				rrb(pile_b);
+				rrb(pile);
 	}
 }
-void	reset_id_sort(t_list **pile)
+void	set_small_cost_up(t_list **pile)
+{
+	t_list	*start;
+	t_list	*tmp;
+	t_list	*smallest;
+	int		len;
+	int		mouvs;
+
+	start = (*pile);
+	len = ft_lstsize((*pile));
+	smallest = (*pile);
+	while ((*pile))
+	{
+		tmp = start;
+		while(tmp)
+		{
+			if( tmp->u_cost < smallest->u_cost )
+				smallest = tmp;
+			tmp = tmp->next;
+		}
+		(*pile) = (*pile)->next;
+	}
+	(*pile) = start;
+	mouvs = smallest->cost;
+	if(mouvs)
+	{
+		if(smallest->pos <= len / 2)
+			while (mouvs--)
+				rb(pile);
+		else
+			while(mouvs--)
+				rrb(pile);
+	}
+}
+/* void	reset_id_sort(t_list **pile)
 {
 	t_list	*start;
 
@@ -283,7 +314,7 @@ void	get_id_sort(t_list **pile)
 		(*pile) = (*pile)->next;
 	}
 		(*pile) = start;
-}
+} */
 
 int		find_idx(int b_idx, t_list **pile_a)
 {
@@ -291,16 +322,37 @@ int		find_idx(int b_idx, t_list **pile_a)
 	int		tmp;
 
 	start = (*pile_a);
+	// tmp = (*pile_a);
 	tmp = 0;
 	while((*pile_a))
 	{
-		if((*pile_a)->index > b_idx && ((*pile_a)->index < tmp || !tmp))
+		if((*pile_a)->index > b_idx && ((*pile_a)->index < tmp|| !tmp))
 			tmp = (*pile_a)->index;
 		(*pile_a) = (*pile_a)->next;
 	}
 	(*pile_a) = start;
 	return(tmp);
 }
+
+void		get_ultimate_cost(t_list **pile_a, t_list **pile_b)
+{
+	t_list	*start_a;
+	t_list	*start_b;
+
+
+	start_b = (*pile_b);
+	while(*pile_b)
+	{
+		start_a = (*pile_a);
+		while((*pile_a)->index != find_idx((*pile_b)->index, pile_a))
+			(*pile_a) = (*pile_a)->next;
+		(*pile_b)->u_cost = (*pile_a)->cost + (*pile_b)->cost;
+		(*pile_b) = (*pile_b)->next;
+		(*pile_a) = start_a;
+	}
+	(*pile_b) = start_b;
+}
+
 
 void	pre_sort(t_list **pile_a, t_list **pile_b)
 {
@@ -341,10 +393,35 @@ void	pre_sort(t_list **pile_a, t_list **pile_b)
 
 
 
-	// if((*pile_a)->index > (*pile_a)->next->index)
-	// 	ra(pile_a);
+	if((*pile_a)->index > (*pile_a)->next->index)
+		ra(pile_a);
 }
 
+void	sort_pile(t_list **pile_a, t_list **pile_b)
+{
+	int	len;
+	len = ft_lstsize((*pile_b));
+	while(len--)
+	{
+		get_pos(pile_a);
+		get_pos(pile_b);
+		get_best_cost(pile_a);
+		get_best_cost(pile_b);
+		get_ultimate_cost(pile_a, pile_b);
+		get_best_cost(pile_a);
+		ft_print_lst("ultm cost =\n", (*pile_b));
+		set_small_cost_up(pile_b);
+		set_idx_up(pile_a, find_idx((*pile_b)->index, pile_a));
+		printf("push = %ld\n", (*pile_b)->value);
+		pa(pile_a, pile_b);
+		// tmp = tmp->next;
+		// printf("tmp = %ld\n", tmp->value);
+	}
+		get_pos(pile_a);
+		get_best_cost(pile_a);
+		set_idx_up(pile_a, 1);
+
+}
 
 // int	calc_pcost(int idx, int pos, int pos_total)
 // {	int		cost;

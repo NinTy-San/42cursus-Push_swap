@@ -26,15 +26,16 @@
 
 typedef struct s_list
 {
-	long			value;
-	int				index;
-	int				id_sort;
-	int				pos;
-	int				cost;
+	long		value;
+	int			index;
+	int			pos;
+	int			cost;
+	int			u_cost;
 	struct s_list	*next;
 } t_list;
 
 // functions ft_lst
+void ft_print_lst(char *msg, t_list *pile);
 t_list	*ft_lstnew(long nb);
 t_list	*ft_lstlast(t_list *lst);
 void	ft_lstadd_back(t_list **lst, t_list *new);
@@ -57,7 +58,12 @@ void	get_pos(t_list **pile_a);
 void	get_best_cost(t_list **pile);
 void	pre_sort(t_list **pile_a, t_list **pile_b);
 void	get_id_sort(t_list **pile);
-int		find_idx(int b_val, t_list **pile_a);
+int	find_idx(int b_val, t_list **pile_a);
+void	get_ultimate_cost(t_list **pile_a, t_list **pile_b);
+void	set_small_cost_up(t_list **pile);
+void	set_idx_up(t_list **pile, int idx);
+void	sort_pile(t_list **pile_a, t_list **pile_b);
+
 
 
 

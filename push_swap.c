@@ -20,7 +20,7 @@
 	printf("%s", msg);
 	while(pile)
 	{
-		printf("val = %ld | idx = %d | pos = %d | id = %d | cost = %d \n", pile->value, pile->index, pile->pos, pile->id_sort, pile->cost);
+		printf("val = %ld | idx = %d | pos = %d | cost = %d \n", pile->value, pile->index, pile->pos, pile->cost);
 		pile = pile->next;
 	}
 	pile = start;
@@ -52,18 +52,18 @@ void ft_print_lst(char *msg, t_list *pile)
         if (pile->pos <= 9)
             printf(" ");
         printf("\x1b[33;1m%d\x1b[0m", pile->pos);
-        printf(" | id = ");
-        if (pile->id_sort <= 99)
-            printf(" ");
-        if (pile->id_sort <= 9)
-            printf(" ");
-        printf("\x1b[34;1m%d\x1b[0m", pile->id_sort);
         printf(" | cost = ");
         if (pile->cost <= 99)
             printf(" ");
         if (pile->cost <= 9)
             printf(" ");
-        printf("\x1b[35;1m%d\x1b[0m", pile->cost);
+        printf("\x1b[34;1m%d\x1b[0m", pile->cost);
+        printf(" | ultimate_cost = ");
+        if (pile->u_cost <= 99)
+            printf(" ");
+        if (pile->u_cost <= 9)
+            printf(" ");
+        printf("\x1b[35;1m%d\x1b[0m", pile->u_cost);
         printf(" \n");
         pile = pile->next;
     }
@@ -74,6 +74,7 @@ int main (int ac, char **av)
 {
 	t_list	*pile_a;
 	t_list	*pile_b;
+	t_list	*idx;
 	// int		size;
 
 	pile_a = NULL;
@@ -102,14 +103,17 @@ int main (int ac, char **av)
 	// }
 	// get_pos(&pile_b);
 	// get_best_cost(&pile_b);
-	get_pos(&pile_a);
-	get_pos(&pile_b);
-	get_best_cost(&pile_a);
-	get_best_cost(&pile_b);
-	// ft_print_lst("pile a = \n", pile_a);
-	// ft_print_lst("pile b = \n", pile_b);
 
-	// printf("idx finded = %d",find_idx(pile_b->index, &pile_a));
+
+
+	ft_print_lst("pile_a = \n", pile_a);
+	ft_print_lst("pile_b = \n", pile_b);
+	sort_pile(&pile_a, &pile_b);
+	ft_print_lst("pile_a = \n", pile_a);
+	ft_print_lst("pile_b = \n", pile_b);
+
+
+	// printf("idx finded = %d",idx->index);
 	// get_id_sort(&pile_b);
 
 	ft_lst_free(&pile_a);

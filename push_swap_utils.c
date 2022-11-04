@@ -6,7 +6,7 @@
 /*   By: adohou <adohou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 19:39:55 by adohou            #+#    #+#             */
-/*   Updated: 2022/11/03 22:52:42 by adohou           ###   ########.fr       */
+/*   Updated: 2022/11/04 18:03:23 by adohou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -391,11 +391,11 @@ void	sort_three(t_list **pile_a)
 			rra(pile_a);
 		}
 	}
-	ft_print_lst("-------------\nend of sort_three =\n", (*pile_a));
-	if(is_sort)
-		printf("\x1b[32;1mOK\x1b[0m\n");
-	else
-		printf("\x1b[31;1mNOK\x1b[0m\n");
+	// ft_print_lst("-------------\nend of sort_three =\n", (*pile_a));
+	// if(is_sort(pile_a))
+	// 	printf("\x1b[32;1mOK\x1b[0m\n");
+	// else
+	// 	printf("\x1b[31;1mNOK\x1b[0m\n");
 }
 void	sort_five(t_list **pile_a, t_list **pile_b)
 {
@@ -449,11 +449,11 @@ void	sort_five(t_list **pile_a, t_list **pile_b)
 		ra(pile_a);
 		pa(pile_a, pile_b);
 	}
-	ft_print_lst("-------------\nend of sort_five =\n", (*pile_a));
-	if(is_sort)
-		printf("\x1b[32;1mOK\x1b[0m\n");
-	else
-		printf("\x1b[31;1mNOK\x1b[0m\n");
+	// ft_print_lst("-------------\nend of sort_five =\n", (*pile_a));
+	// if(is_sort(pile_a))
+	// 	printf("\x1b[32;1mOK\x1b[0m\n");
+	// else
+	// 	printf("\x1b[31;1mNOK\x1b[0m\n");
 }
 
 int		is_sort(t_list **pile_a)

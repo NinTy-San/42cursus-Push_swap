@@ -6,7 +6,7 @@
 /*   By: adohou <adohou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 22:44:42 by adohou            #+#    #+#             */
-/*   Updated: 2022/11/02 18:53:34 by adohou           ###   ########.fr       */
+/*   Updated: 2022/11/04 18:55:19 by adohou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ int	is_int(char *av);
 void	write_error(t_list **pile_a);
 void	get_index(t_list **pile_a);
 void	get_pos(t_list **pile_a);
-// int		calc_pcost(int idx, int pos, int pos_total);
-// void	get_pcost(t_list **pile);
 void	get_best_cost(t_list **pile);
 void	pre_sort(t_list **pile_a, t_list **pile_b);
 void	get_id_sort(t_list **pile);

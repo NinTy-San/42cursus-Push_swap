@@ -6,25 +6,11 @@
 /*   By: adohou <adohou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 22:44:19 by adohou            #+#    #+#             */
-/*   Updated: 2022/11/03 19:00:54 by adohou           ###   ########.fr       */
+/*   Updated: 2022/11/04 18:56:14 by adohou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-/* void ft_print_lst(char *msg, t_list *pile)
-{
-	t_list	*start;
-
-	start = pile;
-	printf("%s", msg);
-	while(pile)
-	{
-		printf("val = %ld | idx = %d | pos = %d | cost = %d \n", pile->value, pile->index, pile->pos, pile->cost);
-		pile = pile->next;
-	}
-	pile = start;
-} */
 
 void ft_print_lst(char *msg, t_list *pile)
 {
@@ -95,14 +81,6 @@ int main (int ac, char **av)
 	}
 	pre_sort(&pile_a, &pile_b);
 	sort_pile(&pile_a, &pile_b);
-
-	ft_print_lst("pile_a = \n", pile_a);
-
-	if(is_sort)
-		printf("\x1b[32;1mOK\x1b[0m\n");
-	else
-		printf("\x1b[31;1mNOK\x1b[0m\n");
-	// ft_print_lst("pile_b = \n", pile_b);
 
 	ft_lst_free(&pile_a);
 	ft_lst_free(&pile_b);

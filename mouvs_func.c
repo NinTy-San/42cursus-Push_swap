@@ -1,18 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mouvs.c                                            :+:      :+:    :+:   */
+/*   mouvs_func.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adohou <adohou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 21:51:30 by adohou            #+#    #+#             */
-/*   Updated: 2022/10/25 23:36:00 by adohou           ###   ########.fr       */
+/*   Updated: 2022/11/04 19:04:32 by adohou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-/* functions */
 void	push(t_list **pile_a, t_list **pile_b)
 {
 	t_list	*tmp;
@@ -77,73 +76,3 @@ void	reverse_rotate(t_list **pile_a)
 	(*pile_a) = last;
 }
 
-/*simple mouv */
-void	pa(t_list **pile_a, t_list **pile_b)
-{
-	push(pile_b, pile_a);
-	write(1, "pa\n", 3);
-}
-
-void	pb(t_list **pile_a, t_list **pile_b)
-{
-	push(pile_a, pile_b);
-	write(1, "pb\n", 3);
-}
-
-void	sa(t_list **pile_a)
-{
-	swap(pile_a);
-	write(1, "sa\n", 3);
-}
-
-void	sb(t_list **pile_b)
-{
-	swap(pile_b);
-	write(1, "sb\n", 3);
-}
-
-void	ra(t_list **pile_a)
-{
-	rotate(pile_a);
-	write(1, "ra\n", 3);
-}
-
-void	rb(t_list **pile_b)
-{
-	rotate(pile_b);
-	write(1, "rb\n", 3);
-}
-
-void	rra(t_list **pile_a)
-{
-	reverse_rotate(pile_a);
-	write(1, "rra\n", 4);
-}
-
-void	rrb(t_list **pile_b)
-{
-	reverse_rotate(pile_b);
-	write(1, "rrb\n", 4);
-}
-
-/* double mouvs */
-void	ss(t_list **pile_a, t_list **pile_b)
-{
-	swap(pile_a);
-	swap(pile_b);
-	write(1, "ss\n", 3);
-}
-
-void rr(t_list **pile_a, t_list **pile_b)
-{
-	rotate(pile_a);
-	rotate(pile_b);
-	write(1, "rr\n", 3);
-}
-
-void rrr(t_list **pile_a, t_list **pile_b)
-{
-	reverse_rotate(pile_a);
-	reverse_rotate(pile_b);
-	write(1, "rrr\n", 4);
-}

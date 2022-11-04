@@ -63,6 +63,10 @@ void	get_ultimate_cost(t_list **pile_a, t_list **pile_b);
 void	set_small_cost_up(t_list **pile);
 void	set_idx_up(t_list **pile, int idx);
 void	sort_pile(t_list **pile_a, t_list **pile_b);
+int		is_sort(t_list **pile_a);
+void	sort_three(t_list **pile_a);
+void	sort_five(t_list **pile_a, t_list **pile_b);
+
 
 
 

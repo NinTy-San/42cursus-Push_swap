@@ -123,7 +123,8 @@ void	get_index(t_list **pile_a)
 	start = (*pile_a);
 	while ((*pile_a))
 	{
-	tmp = start;
+		(*pile_a)->index = 1;
+		tmp = start;
 		while (tmp)
 		{
 			if (tmp->value < (*pile_a)->value)
@@ -365,18 +366,111 @@ void	sort_pile(t_list **pile_a, t_list **pile_b)
 		set_idx_up(pile_a, 1);
 
 }
+void	sort_three(t_list **pile_a)
+{
 
-/* void	sort_three(t_list **pile_a)
+	if((*pile_a)->index == 1)
+	{
+		rra(pile_a);
+		sa(pile_a);
+	}
+	else if((*pile_a)->index == 2)
+	{
+		if((*pile_a)->next->index == 1)
+			sa(pile_a);
+		else
+			rra(pile_a);
+	}
+	else if((*pile_a)->index == 3)
+	{
+		if((*pile_a)->next->index == 1)
+			ra(pile_a);
+		else
+		{
+			sa(pile_a);
+			rra(pile_a);
+		}
+	}
+	ft_print_lst("-------------\nend of sort_three =\n", (*pile_a));
+	if(is_sort)
+		printf("\x1b[32;1mOK\x1b[0m\n");
+	else
+		printf("\x1b[31;1mNOK\x1b[0m\n");
+}
+void	sort_five(t_list **pile_a, t_list **pile_b)
+{
+	t_list	*start;
+	int		cost_id1;
+	int		cost_id5;
+
+	get_pos(pile_a);
+	get_best_cost(pile_a);
+	start = (*pile_a);
+	while((*pile_a))
+	{
+		if((*pile_a)->index == 1)
+			cost_id1 = (*pile_a)->cost;
+		if((*pile_a)->index == 5)
+			cost_id5 = (*pile_a)->cost;
+		(*pile_a) = (*pile_a)->next;
+	}
+	(*pile_a) = start ;
+	if(cost_id1 < cost_id5)
+	{
+		set_idx_up(pile_a, 1);
+		pb(pile_a, pile_b);
+		get_index(pile_a);
+		get_pos(pile_a);
+		get_best_cost(pile_a);
+		set_idx_up(pile_a, 4);
+		pb(pile_a, pile_b);
+	}
+	else
+	{
+		set_idx_up(pile_a, 5);
+		pb(pile_a, pile_b);
+		get_index(pile_a);
+		get_pos(pile_a);
+		get_best_cost(pile_a);
+		set_idx_up(pile_a, 1);
+		pb(pile_a, pile_b);
+		get_index(pile_a);
+	}
+	sort_three(pile_a);
+	if((*pile_b)->value < (*pile_b)->next->value)
+	{
+		pa(pile_a, pile_b);
+		pa(pile_a, pile_b);
+		ra(pile_a);
+	}
+	else
+	{
+		pa(pile_a, pile_b);
+		ra(pile_a);
+		pa(pile_a, pile_b);
+	}
+	ft_print_lst("-------------\nend of sort_five =\n", (*pile_a));
+	if(is_sort)
+		printf("\x1b[32;1mOK\x1b[0m\n");
+	else
+		printf("\x1b[31;1mNOK\x1b[0m\n");
+}
+
+int		is_sort(t_list **pile_a)
 {
 	t_list	*start;
 	t_list	*tmp;
 
 	start = (*pile_a);
 	tmp = (*pile_a)->next;
-	while(*pile_a)
+	while(tmp && tmp->value > (*pile_a)->value)
 	{
-		if(tmp->value >= (*pile_a)->value)
-			tmp = tmp->next;
+		tmp = tmp->next;
 		(*pile_a) = (*pile_a)->next;
 	}
-} */
+	(*pile_a) = start;
+	if(!tmp)
+		return (1);
+	else
+		return (0);
+}

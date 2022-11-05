@@ -23,13 +23,13 @@
 
 typedef struct s_list
 {
-	long		value;
-	int			index;
-	int			pos;
-	int			cost;
-	int			u_cost;
+	long			value;
+	int				index;
+	int				pos;
+	int				cost;
+	int				u_cost;
 	struct s_list	*next;
-} t_list;
+}	t_list;
 
 //functions secure (main.c)
 void	ft_print_lst(char *msg, t_list *pile);
@@ -57,9 +57,10 @@ int		find_idx(int b_val, t_list **pile_a);
 void	set_small_cost_up(t_list **pile);
 void	set_idx_up(t_list **pile, int idx);
 //functions sort_utils
-void 	push_n_swap(t_list **pile_a, t_list **pile_b);
-int	sort_first_half(t_list **pile_a, t_list **pile_b, int nb_push, int size);
-int	sort_scd_half(t_list **pile_a, t_list **pile_b, int nb_push, int size);
+void	push_n_swap(t_list **pile_a, t_list **pile_b);
+int		sort_first_half(t_list **pile_a, t_list **pile_b,
+			int nb_push, int size);
+int		sort_scd_half(t_list **pile_a, t_list **pile_b, int nb_push, int size);
 
 //functions sort
 void	pre_sort(t_list **pile_a, t_list **pile_b);

@@ -19,14 +19,14 @@ void	ss(t_list **pile_a, t_list **pile_b)
 	write(1, "ss\n", 3);
 }
 
-void rr(t_list **pile_a, t_list **pile_b)
+void	rr(t_list **pile_a, t_list **pile_b)
 {
 	rotate(pile_a);
 	rotate(pile_b);
 	write(1, "rr\n", 3);
 }
 
-void rrr(t_list **pile_a, t_list **pile_b)
+void	rrr(t_list **pile_a, t_list **pile_b)
 {
 	reverse_rotate(pile_a);
 	reverse_rotate(pile_b);

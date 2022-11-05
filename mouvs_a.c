@@ -17,16 +17,19 @@ void	pa(t_list **pile_a, t_list **pile_b)
 	push(pile_b, pile_a);
 	write(1, "pa\n", 3);
 }
+
 void	sa(t_list **pile_a)
 {
 	swap(pile_a);
 	write(1, "sa\n", 3);
 }
+
 void	ra(t_list **pile_a)
 {
 	rotate(pile_a);
 	write(1, "ra\n", 3);
 }
+
 void	rra(t_list **pile_a)
 {
 	reverse_rotate(pile_a);

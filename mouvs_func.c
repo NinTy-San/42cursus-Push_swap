@@ -31,14 +31,12 @@ void	swap(t_list **pile_a)
 
 	if (ft_lstsize((*pile_a)) < 2)
 		return ;
-
 	first = (*pile_a);
 	tmp = (*pile_a)->next;
 	first->next = tmp->next;
 	tmp->next = first;
 	(*pile_a) = tmp;
 }
-
 
 void	rotate(t_list **pile_a)
 {
@@ -75,4 +73,3 @@ void	reverse_rotate(t_list **pile_a)
 	last->next = first;
 	(*pile_a) = last;
 }
-

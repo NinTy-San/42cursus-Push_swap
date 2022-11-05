@@ -1,23 +1,23 @@
 #include "push_swap.h"
 
-t_list *get_args(int ac, char **av)
+t_list	*get_args(int ac, char **av)
 {
 	int		i;
 	long	nb;
-	t_list 	*pile_a;
+	t_list	*pile_a;
 	t_list	*new;
 
 	pile_a = NULL;
 	new = NULL;
 	i = 1;
-	nb  = 0;
+	nb = 0;
 	while (i < ac)
 	{
 		if (!is_int(av[i]))
 			return (write_error(&pile_a), NULL);
 		nb = ft_atoi(av[i]);
 		if (nb > INT_MAX || nb < INT_MIN)
-			return (write_error(&pile_a),NULL);
+			return (write_error(&pile_a), NULL);
 		new = ft_lstnew(nb);
 		if (!new)
 			return (NULL);
@@ -31,7 +31,7 @@ t_list *get_args(int ac, char **av)
 
 long	ft_atoi(const char *nptr)
 {
-	int	i;
+	int		i;
 	long	nb;
 	long	sign;
 
@@ -70,7 +70,7 @@ int	check_double(t_list *pile_a, int ac)
 		tmp = pile_a;
 		while (j < ac)
 		{
-			if(i != j && pile_a->value == tmp->value)
+			if (i != j && pile_a->value == tmp->value)
 				return (0);
 			tmp = tmp->next;
 			j++;
@@ -86,7 +86,7 @@ int	is_int(char *av)
 	int		i;
 
 	i = 0;
-	while(av[i])
+	while (av[i])
 	{
 		if (av[i] == ' ' || av[i] == '-' || (av[i] >= '0' && av[i] <= '9'))
 			i++;

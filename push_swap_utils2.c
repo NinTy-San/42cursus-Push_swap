@@ -1,20 +1,20 @@
 #include "push_swap.h"
 
-int		find_idx(int b_idx, t_list **pile_a)
+int	find_idx(int b_idx, t_list **pile_a)
 {
 	t_list	*start;
 	int		tmp;
 
 	start = (*pile_a);
 	tmp = 0;
-	while((*pile_a))
+	while ((*pile_a))
 	{
-		if((*pile_a)->index > b_idx && ((*pile_a)->index < tmp|| !tmp))
+		if ((*pile_a)->index > b_idx && ((*pile_a)->index < tmp || !tmp))
 			tmp = (*pile_a)->index;
 		(*pile_a) = (*pile_a)->next;
 	}
 	(*pile_a) = start;
-	return(tmp);
+	return (tmp);
 }
 
 void	set_small_cost_up(t_list **pile)
@@ -31,9 +31,9 @@ void	set_small_cost_up(t_list **pile)
 	while ((*pile))
 	{
 		tmp = start;
-		while(tmp)
+		while (tmp)
 		{
-			if( tmp->u_cost <= smallest->u_cost )
+			if (tmp->u_cost <= smallest->u_cost)
 				smallest = tmp;
 			tmp = tmp->next;
 		}
@@ -41,13 +41,13 @@ void	set_small_cost_up(t_list **pile)
 	}
 	(*pile) = start;
 	mouvs = smallest->cost;
-	if(mouvs)
+	if (mouvs)
 	{
-		if(smallest->pos <= len / 2)
+		if (smallest->pos <= len / 2)
 			while (mouvs--)
 				rb(pile);
 		else
-			while(mouvs--)
+			while (mouvs--)
 				rrb(pile);
 	}
 }
@@ -63,17 +63,16 @@ void	set_idx_up(t_list **pile, int idx)
 	len = ft_lstsize((*pile));
 	while ((*pile)->index != idx)
 		(*pile) = (*pile)->next;
-
 	mouvs = (*pile)->cost;
 	pos = (*pile)->pos;
 	(*pile) = start;
-	if(mouvs)
+	if (mouvs)
 	{
-		if(pos <= len / 2)
+		if (pos <= len / 2)
 			while (mouvs--)
 				ra(pile);
 		else
-			while(mouvs--)
+			while (mouvs--)
 				rra(pile);
 	}
 }

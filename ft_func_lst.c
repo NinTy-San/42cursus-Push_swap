@@ -28,7 +28,6 @@ t_list	*ft_lstnew(long value)
 	return (lst);
 }
 
-
 t_list	*ft_lstlast(t_list *lst)
 {
 	if (!lst)

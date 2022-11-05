@@ -68,43 +68,16 @@ void	sort_three(t_list **pile_a)
 
 void	sort_five(t_list **pile_a, t_list **pile_b)
 {
-	t_list	*start;
-	int		cost_id1;
-	int		cost_id5;
-
 	get_pos(pile_a);
 	get_best_cost(pile_a);
-	start = (*pile_a);
-	while ((*pile_a))
-	{
-		if ((*pile_a)->index == 1)
-			cost_id1 = (*pile_a)->cost;
-		if ((*pile_a)->index == 5)
-			cost_id5 = (*pile_a)->cost;
-		(*pile_a) = (*pile_a)->next;
-	}
-	(*pile_a) = start ;
-	if (cost_id1 <= cost_id5)
-	{
-		set_idx_up(pile_a, 1);
-		pb(pile_a, pile_b);
-		get_index(pile_a);
-		get_pos(pile_a);
-		get_best_cost(pile_a);
-		set_idx_up(pile_a, 4);
-		pb(pile_a, pile_b);
-	}
-	else
-	{
-		set_idx_up(pile_a, 5);
-		pb(pile_a, pile_b);
-		get_index(pile_a);
-		get_pos(pile_a);
-		get_best_cost(pile_a);
-		set_idx_up(pile_a, 1);
-		pb(pile_a, pile_b);
-		get_index(pile_a);
-	}
+	set_idx_up(pile_a, 5);
+	pb(pile_a, pile_b);
+	get_index(pile_a);
+	get_pos(pile_a);
+	get_best_cost(pile_a);
+	set_idx_up(pile_a, 1);
+	pb(pile_a, pile_b);
+	get_index(pile_a);
 	sort_three(pile_a);
 	if ((*pile_b)->value < (*pile_b)->next->value)
 	{
@@ -118,7 +91,6 @@ void	sort_five(t_list **pile_a, t_list **pile_b)
 		ra(pile_a);
 		pa(pile_a, pile_b);
 	}
-	ft_print_lst("pile A =\n", (*pile_a));
 }
 
 void	sort_pile(t_list **pile_a, t_list **pile_b)

@@ -29,9 +29,9 @@ void	rra(t_list **pile_a)
 	reverse_rotate(pile_a);
 	write(1, "rra\n", 4);
 }
+
 void	sa(t_list **pile_a)
 {
 	swap(pile_a);
 	write(1, "sa\n", 3);
 }
-

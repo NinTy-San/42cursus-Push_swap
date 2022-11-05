@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap_utils2.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: adohou <adohou@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/05 15:07:52 by adohou            #+#    #+#             */
+/*   Updated: 2022/11/05 15:28:42 by adohou           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 int	find_idx(int b_idx, t_list **pile_a)
@@ -17,13 +29,25 @@ int	find_idx(int b_idx, t_list **pile_a)
 	return (tmp);
 }
 
+static void	rotate_small_cost_up(t_list **pile, int mouvs, int pos, int len)
+{
+	if (mouvs)
+	{
+		if (pos <= len / 2)
+			while (mouvs--)
+				rb(pile);
+		else
+			while (mouvs--)
+				rrb(pile);
+	}
+}
+
 void	set_small_cost_up(t_list **pile)
 {
 	t_list	*start;
 	t_list	*tmp;
 	t_list	*smallest;
 	int		len;
-	int		mouvs;
 
 	start = (*pile);
 	len = ft_lstsize((*pile));
@@ -40,16 +64,7 @@ void	set_small_cost_up(t_list **pile)
 		(*pile) = (*pile)->next;
 	}
 	(*pile) = start;
-	mouvs = smallest->cost;
-	if (mouvs)
-	{
-		if (smallest->pos <= len / 2)
-			while (mouvs--)
-				rb(pile);
-		else
-			while (mouvs--)
-				rrb(pile);
-	}
+	rotate_small_cost_up(pile, smallest->cost, smallest->pos, len);
 }
 
 void	set_idx_up(t_list **pile, int idx)

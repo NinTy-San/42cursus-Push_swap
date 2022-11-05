@@ -6,7 +6,7 @@
 /*   By: adohou <adohou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 21:51:30 by adohou            #+#    #+#             */
-/*   Updated: 2022/11/04 19:04:32 by adohou           ###   ########.fr       */
+/*   Updated: 2022/11/05 15:10:46 by adohou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,6 @@ void	push(t_list **pile_a, t_list **pile_b)
 	tmp = (*pile_a)->next;
 	(*pile_a)->next = NULL;
 	ft_lstadd_front((pile_b), (*pile_a));
-	(*pile_a) = tmp;
-}
-
-void	swap(t_list **pile_a)
-{
-	t_list	*first;
-	t_list	*tmp;
-
-	if (ft_lstsize((*pile_a)) < 2)
-		return ;
-	first = (*pile_a);
-	tmp = (*pile_a)->next;
-	first->next = tmp->next;
-	tmp->next = first;
 	(*pile_a) = tmp;
 }
 
@@ -72,4 +58,18 @@ void	reverse_rotate(t_list **pile_a)
 	tmp->next = NULL;
 	last->next = first;
 	(*pile_a) = last;
+}
+
+void	swap(t_list **pile_a)
+{
+	t_list	*first;
+	t_list	*tmp;
+
+	if (ft_lstsize((*pile_a)) < 2)
+		return ;
+	first = (*pile_a);
+	tmp = (*pile_a)->next;
+	first->next = tmp->next;
+	tmp->next = first;
+	(*pile_a) = tmp;
 }

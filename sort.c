@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: adohou <adohou@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/05 15:08:16 by adohou            #+#    #+#             */
+/*   Updated: 2022/11/05 16:03:44 by adohou           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	pre_sort(t_list **pile_a, t_list **pile_b)
@@ -27,6 +39,8 @@ void	pre_sort(t_list **pile_a, t_list **pile_b)
 
 void	sort_three(t_list **pile_a)
 {
+	if (is_sort(pile_a))
+		return ;
 	if ((*pile_a)->index == 1)
 	{
 		rra(pile_a);
@@ -49,6 +63,7 @@ void	sort_three(t_list **pile_a)
 			rra(pile_a);
 		}
 	}
+	ft_print_lst("pile A =\n", (*pile_a));
 }
 
 void	sort_five(t_list **pile_a, t_list **pile_b)
@@ -69,7 +84,7 @@ void	sort_five(t_list **pile_a, t_list **pile_b)
 		(*pile_a) = (*pile_a)->next;
 	}
 	(*pile_a) = start ;
-	if (cost_id1 < cost_id5)
+	if (cost_id1 <= cost_id5)
 	{
 		set_idx_up(pile_a, 1);
 		pb(pile_a, pile_b);
@@ -103,6 +118,7 @@ void	sort_five(t_list **pile_a, t_list **pile_b)
 		ra(pile_a);
 		pa(pile_a, pile_b);
 	}
+	ft_print_lst("pile A =\n", (*pile_a));
 }
 
 void	sort_pile(t_list **pile_a, t_list **pile_b)

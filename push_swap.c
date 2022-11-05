@@ -54,7 +54,7 @@ void	ft_print_lst(char *msg, t_list *pile)
 		pile = pile->next;
 	}
 	pile = start;
-	if (is_sort(pile))
+	if (is_sort(&pile))
 		printf("\x1b[32;1mSort:OK\x1b[0m\n");
 	else
 		printf("\x1b[31;1mNSort/KO\x1b[0m\n");
@@ -123,6 +123,7 @@ int	main(int ac, char **av)
 	}
 	pre_sort(&pile_a, &pile_b);
 	sort_pile(&pile_a, &pile_b);
+	ft_print_lst("pile A =\n", pile_a);
 	ft_lst_free(&pile_a);
 	ft_lst_free(&pile_b);
 	return (0);

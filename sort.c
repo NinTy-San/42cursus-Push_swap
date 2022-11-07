@@ -63,7 +63,7 @@ void	sort_three(t_list **pile_a)
 			rra(pile_a);
 		}
 	}
-	ft_print_lst("pile A =\n", (*pile_a));
+	ft_lst_free(pile_a);
 }
 
 void	sort_five(t_list **pile_a, t_list **pile_b)
@@ -91,6 +91,7 @@ void	sort_five(t_list **pile_a, t_list **pile_b)
 		ra(pile_a);
 		pa(pile_a, pile_b);
 	}
+	ft_lst_free2(pile_a, pile_b);
 }
 
 void	sort_pile(t_list **pile_a, t_list **pile_b)

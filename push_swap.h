@@ -34,6 +34,7 @@ typedef struct s_list
 //functions secure (main.c)
 void	ft_print_lst(char *msg, t_list *pile);
 void	ft_lst_free(t_list **pile);
+void	ft_lst_free2(t_list **pile_a, t_list **pile_b);
 void	write_error(t_list **pile_a);
 int		is_sort(t_list **pile_a);
 

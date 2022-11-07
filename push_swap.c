@@ -42,12 +42,23 @@ void	ft_lst_free(t_list **pile)
 	t_list	*tmp;
 
 	tmp = NULL;
-	while ((*pile))
+	if (pile)
 	{
-		tmp = (*pile)->next;
-		free((*pile));
-		(*pile) = tmp;
+		while ((*pile))
+		{
+			tmp = (*pile)->next;
+			free((*pile));
+			(*pile) = tmp;
+		}
 	}
+}
+
+void	ft_lst_free2(t_list **pile_a, t_list **pile_b)
+{
+	if (pile_a)
+		ft_lst_free(pile_a);
+	if (pile_b)
+		ft_lst_free(pile_b);
 }
 
 int	main(int ac, char **av)
@@ -61,7 +72,7 @@ int	main(int ac, char **av)
 		return (0);
 	pile_a = get_args(ac, av);
 	if (!pile_a || is_sort(&pile_a))
-		return (0);
+		return (ft_lst_free(&pile_a), 0);
 	get_index(&pile_a);
 	if (ft_lstsize(pile_a) == 3)
 		return (sort_three(&pile_a), 0);

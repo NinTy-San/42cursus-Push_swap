@@ -6,7 +6,7 @@
 /*   By: adohou <adohou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 22:44:42 by adohou            #+#    #+#             */
-/*   Updated: 2022/11/05 15:37:49 by adohou           ###   ########.fr       */
+/*   Updated: 2022/11/07 19:31:17 by adohou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_list
 }	t_list;
 
 //functions secure (main.c)
-void	ft_print_lst(char *msg, t_list *pile);
+// void	ft_print_lst(char *msg, t_list *pile);
 void	ft_lst_free(t_list **pile);
 void	ft_lst_free2(t_list **pile_a, t_list **pile_b);
 void	write_error(t_list **pile_a);

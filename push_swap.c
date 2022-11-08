@@ -6,7 +6,7 @@
 /*   By: adohou <adohou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 22:44:19 by adohou            #+#    #+#             */
-/*   Updated: 2022/11/07 19:31:08 by adohou           ###   ########.fr       */
+/*   Updated: 2022/11/08 18:32:52 by adohou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,10 @@ int	main(int ac, char **av)
 		return (ft_lst_free(&pile_a), 0);
 	get_index(&pile_a);
 	if (ft_lstsize(pile_a) == 2)
+	{
 		sa(&pile_a);
+		return (ft_lst_free(&pile_a), 0);
+	}
 	if (ft_lstsize(pile_a) == 3)
 		return (sort_three(&pile_a), 0);
 	if (ft_lstsize(pile_a) == 5)

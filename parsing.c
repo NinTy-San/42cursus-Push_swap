@@ -6,7 +6,7 @@
 /*   By: adohou <adohou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/05 15:07:48 by adohou            #+#    #+#             */
-/*   Updated: 2022/11/05 15:07:50 by adohou           ###   ########.fr       */
+/*   Updated: 2022/11/09 22:14:11 by adohou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	check_double(t_list *pile_a, int ac)
 		while (j < ac)
 		{
 			if (i != j && pile_a->value == tmp->value)
-				return (0);
+				return (printf("double"), 0);
 			tmp = tmp->next;
 			j++;
 		}
@@ -100,7 +100,19 @@ int	is_int(char *av)
 	i = 0;
 	while (av[i])
 	{
-		if (av[i] == ' ' || av[i] == '-' || (av[i] >= '0' && av[i] <= '9'))
+		if (av[i] == ' ')
+			i++;
+		else if ((av[i] == '-' || av[i] == '+')
+			&& (av[i + 1] >= '0' && av[i + 1] <= '9'))
+			i++;
+		else if ((av[i] >= '0' && av[i] <= '9')
+			&& (av[i + 1] >= '0' && av[i + 1] <= '9'))
+			i++;
+		else if ((av[i] >= '0' && av[i] <= '9')
+			&& av[i + 1] == ' ')
+			i++;
+		else if ((av[i] >= '0' && av[i] <= '9')
+			&& av[i + 1] == '\0')
 			i++;
 		else
 			return (0);

@@ -6,7 +6,7 @@
 /*   By: adohou <adohou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 22:44:42 by adohou            #+#    #+#             */
-/*   Updated: 2022/11/10 18:27:50 by adohou           ###   ########.fr       */
+/*   Updated: 2022/11/10 19:25:52 by adohou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,9 @@ void	sort_pile(t_list **pile_a, t_list **pile_b);
 
 //functions mouvs
 void	push(t_list **pile_a, t_list **pile_b);
-void	swap(t_list **pile_a);
-void	rotate(t_list **pile_a);
-void	reverse_rotate(t_list **pile_a);
+void	swap(t_list **pile);
+void	rotate(t_list **pile);
+void	reverse_rotate(t_list **pile);
 
 //mouvs a
 void	pa(t_list **pile_a, t_list **pile_b);
@@ -90,7 +90,7 @@ void	rra(t_list **pile_a);
 void	pb(t_list **pile_a, t_list **pile_b);
 void	rb(t_list **pile_b);
 void	sb(t_list **pile_b);
-void	rrb(t_list **pile_a);
+void	rrb(t_list **pile_b);
 
 //mouvs a + b
 void	ss(t_list **pile_a, t_list **pile_b);

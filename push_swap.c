@@ -6,7 +6,7 @@
 /*   By: adohou <adohou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 22:44:19 by adohou            #+#    #+#             */
-/*   Updated: 2022/11/09 21:30:41 by adohou           ###   ########.fr       */
+/*   Updated: 2022/11/10 19:09:57 by adohou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ int	main(int ac, char **av)
 {
 	t_list	*pile_a;
 	t_list	*pile_b;
-	// int		size;
 
 	pile_a = NULL;
 	pile_b = NULL;

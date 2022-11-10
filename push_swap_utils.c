@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ninety-san <ninety-san@student.42.fr>      +#+  +:+       +#+        */
+/*   By: adohou <adohou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 19:39:55 by adohou            #+#    #+#             */
-/*   Updated: 2022/11/05 03:04:08 by ninety-san       ###   ########.fr       */
+/*   Updated: 2022/11/10 18:34:01 by adohou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	get_best_cost(t_list **pile)
 	pos_total = ft_lstlast((*pile))->pos;
 	while ((*pile))
 	{
-		if ((*pile)->pos <= pos_total / 2 + 1)
+		if ((*pile)->pos < pos_total / 2 + 1)
 			(*pile)->cost = (*pile)->pos - 1;
 		else
 			(*pile)->cost = (pos_total - (*pile)->pos + 1);

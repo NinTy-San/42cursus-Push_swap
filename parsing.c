@@ -6,7 +6,7 @@
 /*   By: adohou <adohou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/05 15:07:48 by adohou            #+#    #+#             */
-/*   Updated: 2022/11/09 22:14:11 by adohou           ###   ########.fr       */
+/*   Updated: 2022/11/10 19:08:54 by adohou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_list	*get_args(int ac, char **av)
 		i++;
 	}
 	if (!check_double(pile_a, ac))
-		return (write_error(&pile_a), NULL);
+		return (ft_lst_free(&pile_a), NULL);
 	return (pile_a);
 }
 
@@ -83,7 +83,7 @@ int	check_double(t_list *pile_a, int ac)
 		while (j < ac)
 		{
 			if (i != j && pile_a->value == tmp->value)
-				return (printf("double"), 0);
+				return (write(2, "Error\n", 6), 0);
 			tmp = tmp->next;
 			j++;
 		}

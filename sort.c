@@ -6,7 +6,7 @@
 /*   By: adohou <adohou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/05 15:08:16 by adohou            #+#    #+#             */
-/*   Updated: 2022/11/09 20:52:43 by adohou           ###   ########.fr       */
+/*   Updated: 2022/11/10 19:09:17 by adohou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,7 @@ void	pre_sort(t_list **pile_a, t_list **pile_b)
 			nb_push = sort_first_half(pile_a, pile_b, nb_push, size);
 	}
 	while (nb_push < size - 2)
-	{
-		if (nb_push >= half)
-			nb_push = sort_scd_half(pile_a, pile_b, nb_push, size);
-		else
-			nb_push = sort_first_half(pile_a, pile_b, nb_push, size);
-	}
+		nb_push = sort_scd_half(pile_a, pile_b, nb_push, size);
 }
 
 void	sort_three(t_list **pile_a)

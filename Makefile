@@ -2,7 +2,7 @@ NAME = push_swap
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra -g
+CFLAGS = -Wall -Werror -Wextra
 
 SRCS = $(wildcard *.c)
 
